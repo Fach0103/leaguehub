@@ -1,0 +1,40 @@
+/* =========================================================
+   league-footer — barra inferior tipo "banca"
+   ========================================================= */
+
+league-footer {
+  display: block;
+  height: var(--footer-height);
+  background: var(--pitch-ink);
+  border-top: 1px solid var(--steel);
+}
+
+.lh-footer {
+  height: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--chalk-dim);
+}
+
+.lh-footer__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lh-footer__status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.lh-footer__status.is-error .dot {
+  background: var(--danger);
+}

@@ -1,0 +1,104 @@
+/* =========================================================
+   league-navbar — panel tipo marcador de estadio
+   ========================================================= */
+
+league-navbar {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-height);
+  background: var(--pitch-ink);
+  border-bottom: 3px solid var(--signal);
+}
+
+.lh-nav {
+  height: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.lh-nav__brand {
+  font-family: var(--font-display);
+  color: var(--chalk);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lh-nav__brand span { color: var(--signal); }
+
+/* --- Display de "liga activa" estilo marcador --- */
+.lh-nav__active-league {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--turf-solid);
+  border: 1px solid var(--steel);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  color: var(--chalk);
+  font-size: 12px;
+  min-width: 0;
+}
+
+.lh-nav__active-league .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--signal);
+}
+
+.lh-nav__active-league .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+}
+
+.lh-nav__active-league .sport {
+  color: var(--chalk-dim);
+  border-left: 1px solid var(--steel);
+  padding-left: var(--space-2);
+}
+
+.lh-nav__links {
+  display: flex;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.lh-nav__links a {
+  font-family: var(--font-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--chalk-dim);
+  text-decoration: none;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.lh-nav__links a:hover {
+  color: var(--chalk);
+}
+
+.lh-nav__links a.is-active {
+  color: var(--chalk);
+  border-bottom-color: var(--signal);
+}
+
+@media (max-width: 720px) {
+  .lh-nav__links { gap: var(--space-3); }
+  .lh-nav__active-league .name { max-width: 90px; }
+}

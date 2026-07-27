@@ -1,0 +1,136 @@
+/* =========================================================
+   LeagueHub — main.css
+   Tokens de diseño base ("cascarón" de la app).
+   Los temas por deporte (Fase 7) sobreescriben --accent-*
+   a nivel de <body data-sport="futbol"> sin tocar este archivo.
+   ========================================================= */
+
+:root {
+  /* --- Paleta base (marcador deportivo nocturno) --- */
+  --pitch-ink: #0b1f17;      /* fondo principal, cancha de noche */
+  --turf: #16302280;         /* paneles secundarios (con alpha) */
+  --turf-solid: #16302f;
+  --chalk: #f1eee4;          /* texto claro / líneas de cancha */
+  --chalk-dim: #c9c4b4;      /* texto secundario sobre fondo oscuro */
+  --steel: #3e5c76;          /* bordes, divisores */
+  --signal: #ff4b2e;         /* acento principal (naranja señal) */
+  --signal-dim: #ff4b2e33;
+  --gold: #e8b93b;           /* ganador / destacado */
+  --ink: #14201b;            /* texto oscuro sobre fondo claro */
+  --paper: #faf9f5;          /* fondo de contenido (vistas) */
+  --paper-line: #ded9c9;     /* divisores sobre fondo claro */
+  --danger: #c73e3e;
+  --success: #2f8f5b;
+
+  /* --- Tipografía --- */
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* --- Escala --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  --nav-height: 64px;
+  --footer-height: 44px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin: 0 0 var(--space-3) 0;
+  color: var(--ink);
+}
+
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+
+p { line-height: 1.5; margin: 0 0 var(--space-2) 0; }
+
+a { color: inherit; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+/* Números / marcadores siempre en mono, en toda la app */
+.score, .stat-number, .mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Layout general --- */
+#view-root {
+  min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+  padding: var(--space-4);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.view-empty {
+  border: 1px dashed var(--paper-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: center;
+  color: var(--chalk-dim);
+  background: #ffffff;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 18px;
+  font-size: 13px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius-sm);
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+
+.btn:hover { background: var(--signal); border-color: var(--signal); }
+.btn:active { transform: translateY(1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
