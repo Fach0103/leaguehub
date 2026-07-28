@@ -1,0 +1,82 @@
+/**
+ * teams.js
+ * CRUD de la entidad Team. Siempre filtrada por leagueId.
+ */
+window.LH = window.LH || {};
+LH.teams = (function () {
+  "use strict";
+
+  const STORE = "teams";
+
+  /**
+   * stats agregadas del equipo. Empiezan en cero y las va tocando
+   * matchOperations.js (Fase 4), nunca se calculan "a mano" desde la UI.
+   */
+  function emptyStats() {
+    return { pj: 0, pg: 0, pe: 0, pp: 0, pf: 0, pc: 0 };
+  }
+
+  async function create(data) {
+    if (!data.name || !data.name.trim()) {
+      throw new Error("El nombre del equipo es obligatorio.");
+    }
+    if (!data.leagueId) {
+      throw new Error("El equipo debe pertenecer a una liga.");
+    }
+
+    const existing = await getByLeague(data.leagueId);
+    const nameTaken = existing.some(
+      (t) => t.name.toLowerCase() === data.name.trim().toLowerCase()
+    );
+    if (nameTaken) {
+      throw new Error("Ya existe un equipo con ese nombre en esta liga.");
+    }
+
+    const team = {
+      leagueId: Number(data.leagueId),
+      name: data.name.trim(),
+      crest: data.crest || "",
+      colorPrimary: data.colorPrimary || "#333333",
+      colorSecondary: data.colorSecondary || "#ffffff",
+      city: data.city || "",
+      stats: emptyStats(),
+    };
+
+    const id = await LH.db.add(STORE, team);
+    return { ...team, id };
+  }
+
+  async function getByLeague(leagueId) {
+    const teams = await LH.db.getAllByIndex(STORE, "leagueId", Number(leagueId));
+    return teams.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  async function getById(id) {
+    return LH.db.get(STORE, Number(id));
+  }
+
+  async function update(id, changes) {
+    const team = await getById(id);
+    if (!team) throw new Error("Equipo no encontrado.");
+
+    if (changes.name !== undefined) team.name = changes.name.trim();
+    if (changes.crest !== undefined) team.crest = changes.crest;
+    if (changes.colorPrimary !== undefined) team.colorPrimary = changes.colorPrimary;
+    if (changes.colorSecondary !== undefined) team.colorSecondary = changes.colorSecondary;
+    if (changes.city !== undefined) team.city = changes.city;
+
+    await LH.db.put(STORE, team);
+    return team;
+  }
+
+  /**
+   * Bloquea la eliminación si el equipo tiene partidos (sección 4.3.3).
+   * La eliminación en cascada de jugadores se resuelve en Fase 2/3
+   * cuando exista matches.js para poder chequear partidos asociados.
+   */
+  async function remove(id) {
+    return LH.db.delete(STORE, Number(id));
+  }
+
+  return { create, getByLeague, getById, update, remove, emptyStats };
+})();

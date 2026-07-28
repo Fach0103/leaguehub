@@ -16,7 +16,10 @@ class LeagueNavbar extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this._onNavigate = () => this.updateActiveLink();
+    this._onNavigate = () => {
+      this.updateActiveLink();
+      this.updateActiveLeagueBadge();
+    };
     document.addEventListener("lh:navigate", this._onNavigate);
   }
 
@@ -34,7 +37,8 @@ class LeagueNavbar extends HTMLElement {
         <a class="lh-nav__brand" href="#dashboard">League<span>Hub</span></a>
         <div class="lh-nav__active-league" id="lh-active-league">
           <span class="dot"></span>
-          <span class="name">Sin liga activa</span>
+          <span class="name">Cargando…</span>
+          <span class="sport" id="lh-active-league-sport"></span>
         </div>
         <nav class="lh-nav__links">${links}</nav>
       </div>
@@ -52,14 +56,27 @@ class LeagueNavbar extends HTMLElement {
   }
 
   /**
-   * Se completa en la Fase 1/2 cuando exista LH.state con la liga activa
-   * leída desde IndexedDB. Por ahora deja el placeholder.
+   * Lee la liga activa desde IndexedDB (vía LH.leagues, Fase 1) y actualiza
+   * el badge. Es async porque IndexedDB lo es; por eso no se hace en el
+   * mismo render() síncrono sino aparte.
    */
-  updateActiveLeagueBadge() {
-    const badge = this.querySelector("#lh-active-league .name");
-    if (window.LH && LH.state && typeof LH.state.getActiveLeague === "function") {
-      const league = LH.state.getActiveLeague();
-      badge.textContent = league ? league.name : "Sin liga activa";
+  async updateActiveLeagueBadge() {
+    const nameEl = this.querySelector("#lh-active-league .name");
+    const sportEl = this.querySelector("#lh-active-league-sport");
+    if (!nameEl || !window.LH || !LH.leagues) return;
+
+    try {
+      const league = await LH.leagues.getActive();
+      if (league) {
+        nameEl.textContent = league.name;
+        sportEl.textContent = LH.getSportTerms(league.sport).label;
+      } else {
+        nameEl.textContent = "Sin liga activa";
+        sportEl.textContent = "";
+      }
+    } catch (err) {
+      nameEl.textContent = "Sin liga activa";
+      sportEl.textContent = "";
     }
   }
 }
