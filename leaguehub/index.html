@@ -9,7 +9,12 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components/navbar.css" />
   <link rel="stylesheet" href="css/components/footer.css" />
-  <!-- Fase 2+: <link rel="stylesheet" href="css/views/leagues.css" />, etc. -->
+  <link rel="stylesheet" href="css/components/card.css" />
+  <link rel="stylesheet" href="css/components/dialog.css" />
+  <link rel="stylesheet" href="css/components/toast.css" />
+  <link rel="stylesheet" href="css/components/form.css" />
+  <link rel="stylesheet" href="css/components/matchcard.css" />
+  <!-- Fase 3+: <link rel="stylesheet" href="css/views/matches.css" />, etc. -->
 </head>
 <body>
   <league-navbar></league-navbar>
@@ -20,6 +25,9 @@
 
   <league-footer></league-footer>
 
+  <confirm-dialog></confirm-dialog>
+  <toast-container></toast-container>
+
   <!--
     Scripts clásicos (NO type="module"): con file:// Chrome bloquea
     los ES Modules por CORS. Todo se cuelga del namespace global LH,
@@ -28,6 +36,8 @@
 
   <!-- Núcleo -->
   <script src="js/router.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
   <script src="js/sports-terms.js"></script>
 
   <!-- Capa de datos (IndexedDB) -->
@@ -35,10 +45,17 @@
   <script src="js/db/leagues.js"></script>
   <script src="js/db/teams.js"></script>
   <script src="js/db/players.js"></script>
+  <script src="js/db/matches.js"></script>
 
   <!-- Componentes (Custom Elements) -->
   <script src="js/components/NavBar.js"></script>
   <script src="js/components/Footer.js"></script>
+  <script src="js/components/ConfirmDialog.js"></script>
+  <script src="js/components/Toast.js"></script>
+  <script src="js/components/LeagueCard.js"></script>
+  <script src="js/components/TeamCard.js"></script>
+  <script src="js/components/PlayerCard.js"></script>
+  <script src="js/components/MatchCard.js"></script>
 
   <!-- Vistas: cada una registra LH.views.<nombre> -->
   <script src="js/views/dashboard.js"></script>

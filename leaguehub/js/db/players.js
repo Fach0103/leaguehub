@@ -60,11 +60,22 @@ LH.players = (function () {
     const player = await getById(id);
     if (!player) throw new Error("Jugador no encontrado.");
 
+    const targetTeamId = changes.teamId !== undefined ? Number(changes.teamId) : player.teamId;
+    if (changes.number !== undefined) {
+      const teammates = await getByTeam(targetTeamId);
+      const numberTaken = teammates.some(
+        (p) => p.id !== player.id && p.number === Number(changes.number)
+      );
+      if (numberTaken) {
+        throw new Error("Ese número ya está asignado a otro jugador del equipo.");
+      }
+      player.number = Number(changes.number);
+    }
+
     if (changes.name !== undefined) player.name = changes.name.trim();
     if (changes.photo !== undefined) player.photo = changes.photo;
     if (changes.position !== undefined) player.position = changes.position;
-    if (changes.number !== undefined) player.number = Number(changes.number);
-    if (changes.teamId !== undefined) player.teamId = Number(changes.teamId);
+    if (changes.teamId !== undefined) player.teamId = targetTeamId;
 
     await LH.db.put(STORE, player);
     return player;

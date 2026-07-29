@@ -1,6 +1,6 @@
 /**
  * leagues.js
- * CRUD de la entidad League + activar liga.
+ * CRUD de la entidad League + activar liga + borrado en cascada.
  * Nadie fuera de este archivo debería tocar el store "leagues" directamente.
  */
 window.LH = window.LH || {};
@@ -80,12 +80,75 @@ LH.leagues = (function () {
   }
 
   /**
-   * Elimina la liga SIN cascada todavía (Fase 1). La eliminación en cascada
-   * real (equipos, jugadores, partidos, eventos) se implementa en Fase 2
-   * como operación de integridad, en su propio archivo.
+   * Elimina la liga y, en cascada, todos sus equipos, jugadores, partidos
+   * y eventos — todo dentro de UNA sola transacción (sección 4.2.4).
+   *
+   * Importante: todo el trabajo se encadena con cursores dentro de los
+   * callbacks onsuccess de la MISMA transacción. No se usa async/await
+   * con operaciones ajenas a ella (fetch, setTimeout, etc.), porque eso
+   * arriesgaría que IndexedDB cierre la transacción antes de tiempo.
    */
-  async function remove(id) {
-    return LH.db.delete(STORE, Number(id));
+  async function removeCascade(id) {
+    id = Number(id);
+    await LH.db.transaction(
+      ["leagues", "teams", "players", "matches", "events"],
+      "readwrite",
+      (stores) => deleteLeagueContents(stores, id)
+    );
+    // Si borramos la liga activa, limpiamos la referencia guardada.
+    if (localStorage.getItem("lh:activeLeagueId") === String(id)) {
+      localStorage.removeItem("lh:activeLeagueId");
+    }
+  }
+
+  function deleteLeagueContents(stores, leagueId) {
+    stores.leagues.delete(leagueId);
+
+    // Equipos de la liga -> jugadores de cada equipo.
+    const teamsCursorReq = stores.teams
+      .index("leagueId")
+      .openCursor(IDBKeyRange.only(leagueId));
+    teamsCursorReq.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (!cursor) return;
+      const teamId = cursor.value.id;
+      cursor.delete();
+
+      const playersCursorReq = stores.players
+        .index("teamId")
+        .openCursor(IDBKeyRange.only(teamId));
+      playersCursorReq.onsuccess = (ev) => {
+        const pCursor = ev.target.result;
+        if (!pCursor) return;
+        pCursor.delete();
+        pCursor.continue();
+      };
+
+      cursor.continue();
+    };
+
+    // Partidos de la liga -> eventos de cada partido.
+    const matchesCursorReq = stores.matches
+      .index("leagueId")
+      .openCursor(IDBKeyRange.only(leagueId));
+    matchesCursorReq.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (!cursor) return;
+      const matchId = cursor.value.id;
+      cursor.delete();
+
+      const eventsCursorReq = stores.events
+        .index("matchId")
+        .openCursor(IDBKeyRange.only(matchId));
+      eventsCursorReq.onsuccess = (ev) => {
+        const eCursor = ev.target.result;
+        if (!eCursor) return;
+        eCursor.delete();
+        eCursor.continue();
+      };
+
+      cursor.continue();
+    };
   }
 
   /**
@@ -126,5 +189,5 @@ LH.leagues = (function () {
     return all.find((l) => l.isActive) || null;
   }
 
-  return { create, getAll, getById, update, remove, setActive, getActive };
+  return { create, getAll, getById, update, removeCascade, setActive, getActive };
 })();

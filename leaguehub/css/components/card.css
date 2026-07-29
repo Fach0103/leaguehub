@@ -1,0 +1,140 @@
+/* =========================================================
+   Estilo base de tarjeta, compartido por league-card,
+   team-card y player-card. Cada uno agrega detalles propios abajo.
+   ========================================================= */
+
+.lh-card {
+  background: #ffffff;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.lh-card__meta {
+  font-size: 12px;
+  color: var(--chalk-dim);
+  margin: 0;
+}
+
+.lh-card__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--paper-line);
+}
+
+.lh-card__actions .btn {
+  padding: 6px 12px;
+  font-size: 11px;
+}
+
+.lh-badge {
+  background: var(--signal);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+/* --- League card --- */
+.lh-league-card.is-active {
+  border-color: var(--signal);
+  box-shadow: 0 0 0 1px var(--signal);
+}
+
+.lh-league-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.lh-league-card__icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.lh-league-card__title {
+  flex: 1;
+}
+
+.lh-league-card__title h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* --- Team / player shared: escudo y avatar --- */
+.lh-team-card,
+.lh-player-card {
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lh-team-card:hover,
+.lh-player-card:hover {
+  border-color: var(--steel);
+}
+
+.lh-team-card__body,
+.lh-player-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.lh-team-card__body h3,
+.lh-player-card__body h3 {
+  margin: 0 0 2px 0;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.lh-crest,
+.lh-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.lh-crest--placeholder,
+.lh-avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--steel);
+  color: #fff;
+}
+
+/* Team/player card apilada: acciones abajo del todo en columna en mobile */
+.lh-team-card,
+.lh-player-card {
+  flex-wrap: wrap;
+}
+.lh-team-card .lh-card__actions,
+.lh-player-card .lh-card__actions {
+  width: 100%;
+  border-top: 1px solid var(--paper-line);
+}
+
+/* --- Grillas de listado, reutilizadas por las 3 vistas --- */
+.lh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3);
+}

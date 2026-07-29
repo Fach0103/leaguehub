@@ -1,0 +1,42 @@
+/* =========================================================
+   toast-container
+   ========================================================= */
+
+toast-container {
+  position: fixed;
+  bottom: calc(var(--footer-height) + var(--space-3));
+  right: var(--space-3);
+  z-index: 100;
+  display: block;
+  pointer-events: none;
+}
+
+.lh-toast-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+
+.lh-toast {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #fff;
+  background: var(--ink);
+  border-left: 4px solid var(--success);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.lh-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lh-toast--error {
+  border-left-color: var(--danger);
+}

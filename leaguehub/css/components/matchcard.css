@@ -1,0 +1,65 @@
+/* =========================================================
+   match-card
+   ========================================================= */
+
+.lh-match-card {
+  cursor: pointer;
+}
+
+.lh-match-card:hover {
+  border-color: var(--steel);
+}
+
+.lh-match-card__teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.lh-match-card__team {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lh-match-card__teams .score {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 2px 10px;
+  background: var(--pitch-ink);
+  color: var(--chalk);
+  border-radius: var(--radius-sm);
+}
+
+.lh-match-card__vs {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--chalk-dim);
+  text-transform: uppercase;
+}
+
+.lh-match-card__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--chalk-dim);
+  color: #777;
+}
+
+.lh-match-card__status {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.lh-match-card__status--finished {
+  color: var(--success);
+}
+
+.lh-match-card__status--scheduled {
+  color: var(--steel);
+}

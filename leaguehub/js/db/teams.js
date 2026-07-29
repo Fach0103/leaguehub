@@ -59,7 +59,15 @@ LH.teams = (function () {
     const team = await getById(id);
     if (!team) throw new Error("Equipo no encontrado.");
 
-    if (changes.name !== undefined) team.name = changes.name.trim();
+    if (changes.name !== undefined) {
+      const newName = changes.name.trim();
+      const siblings = await getByLeague(team.leagueId);
+      const nameTaken = siblings.some(
+        (t) => t.id !== team.id && t.name.toLowerCase() === newName.toLowerCase()
+      );
+      if (nameTaken) throw new Error("Ya existe un equipo con ese nombre en esta liga.");
+      team.name = newName;
+    }
     if (changes.crest !== undefined) team.crest = changes.crest;
     if (changes.colorPrimary !== undefined) team.colorPrimary = changes.colorPrimary;
     if (changes.colorSecondary !== undefined) team.colorSecondary = changes.colorSecondary;
@@ -70,13 +78,24 @@ LH.teams = (function () {
   }
 
   /**
-   * Bloquea la eliminación si el equipo tiene partidos (sección 4.3.3).
-   * La eliminación en cascada de jugadores se resuelve en Fase 2/3
-   * cuando exista matches.js para poder chequear partidos asociados.
+   * Elimina el equipo. Si tiene jugadores, se eliminan en cascada dentro
+   * de la misma transacción (sección 4.3.3). El bloqueo por "tiene partidos
+   * jugados o programados" se agrega en Fase 3, cuando exista matches.js
+   * y por lo tanto algo que consultar.
    */
-  async function remove(id) {
-    return LH.db.delete(STORE, Number(id));
+  async function removeCascade(id) {
+    id = Number(id);
+    await LH.db.transaction(["teams", "players"], "readwrite", (stores) => {
+      stores.teams.delete(id);
+      const cursorReq = stores.players.index("teamId").openCursor(IDBKeyRange.only(id));
+      cursorReq.onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (!cursor) return;
+        cursor.delete();
+        cursor.continue();
+      };
+    });
   }
 
-  return { create, getByLeague, getById, update, remove, emptyStats };
+  return { create, getByLeague, getById, update, removeCascade, emptyStats };
 })();
