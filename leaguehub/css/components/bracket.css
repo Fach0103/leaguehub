@@ -1,0 +1,85 @@
+.lh-bracket {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding: var(--space-3) 0;
+}
+
+.lh-bracket__round {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 200px;
+}
+
+.lh-bracket__round-title {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: var(--space-2);
+  color: var(--chalk-dim);
+}
+
+.lh-bracket__match {
+  background: #ffffff;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+
+.lh-bracket__match:hover {
+  border-color: var(--steel);
+}
+
+.lh-bracket__team {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.lh-bracket__team.is-winner {
+  background: #e8f5e9;
+  border-left: 3px solid var(--success);
+}
+
+.lh-bracket__team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lh-bracket__score {
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--pitch-ink);
+  color: var(--chalk);
+  padding: 2px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.lh-bracket__status {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 720px) {
+  .lh-bracket {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .lh-bracket__round {
+    min-width: unset;
+  }
+}

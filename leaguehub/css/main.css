@@ -134,3 +134,11 @@ button {
   border-color: var(--danger);
   color: #fff;
 }
+
+/* --- Identidad visual por deporte (Fase 7) --- */
+body[data-sport="futbol"] { --signal: #2e7d32; --signal-dim: #2e7d3233; }
+body[data-sport="basquet"] { --signal: #e65100; --signal-dim: #e6510033; }
+body[data-sport="voley"] { --signal: #1565c0; --signal-dim: #1565c033; }
+body[data-sport="futbol"] .lh-nav { border-bottom-color: var(--signal); }
+body[data-sport="basquet"] .lh-nav { border-bottom-color: var(--signal); }
+body[data-sport="voley"] .lh-nav { border-bottom-color: var(--signal); }

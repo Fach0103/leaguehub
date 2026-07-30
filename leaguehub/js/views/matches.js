@@ -21,16 +21,25 @@ LH.views.matches = async function (root) {
     return;
   }
 
+  const isLeagueMode = league.mode === "league";
+
   let editingMatch = null;
   let teams = [];
   let teamsById = {};
   let allMatches = [];
-  let filters = { status: "", teamId: "", from: "", to: "" };
+  let filters = { status: "", teamId: "", from: "", to: "", round: "" };
 
   async function loadData() {
     teams = await LH.teams.getByLeague(league.id);
     teamsById = Object.fromEntries(teams.map((t) => [t.id, t]));
     allMatches = await LH.matches.getByLeague(league.id);
+  }
+
+  function getRoundOptions() {
+    const rounds = [...new Set(allMatches.map((m) => m.roundLabel).filter(Boolean))].sort();
+    return rounds
+      .map((r) => `<option value="${r}" ${filters.round === r ? "selected" : ""}>${r}</option>`)
+      .join("");
   }
 
   function applyFilters() {
@@ -42,13 +51,13 @@ LH.views.matches = async function (root) {
       }
       if (filters.from && m.date < new Date(filters.from).getTime()) return false;
       if (filters.to && m.date > new Date(filters.to).getTime() + 86399999) return false;
+      if (!isLeagueMode && filters.round && m.roundLabel !== filters.round) return false;
       return true;
     });
   }
 
   function paint() {
     const esc = LH.utils.escapeHtml;
-    const isLeagueMode = league.mode === "league";
 
     const teamOptions = teams
       .map(
@@ -67,13 +76,15 @@ LH.views.matches = async function (root) {
                   allMatches.length > 0 || teams.length < 2 ? "disabled" : ""
                 }>Generar fixture</button>
                  <button class="btn" id="btn-new-match" type="button" ${teams.length < 2 ? "disabled" : ""}>+ Nuevo partido</button>`
-              : ""
+              : `<button class="btn" id="btn-generate-bracket" type="button" ${
+                  allMatches.length > 0 || teams.length !== league.bracketSize ? "disabled" : ""
+                }>Generar bracket</button>`
           }
         </div>
       </div>
       ${
         !isLeagueMode
-          ? '<p class="lh-card__meta">Esta liga es de eliminación directa: el bracket se genera desde la vista Ligas y se administra en Estadísticas (disponible en una fase posterior).</p>'
+          ? `<p class="lh-card__meta">Los partidos se generan automáticamente con el bracket. Necesitas exactamente ${league.bracketSize} equipos.</p>`
           : ""
       }
       ${
@@ -88,6 +99,7 @@ LH.views.matches = async function (root) {
           <option value="finished" ${filters.status === "finished" ? "selected" : ""}>Finalizados</option>
         </select>
         <select id="f-team"><option value="">Todos los equipos</option>${teamOptions}</select>
+        ${!isLeagueMode ? `<select id="f-round"><option value="">Todas las rondas</option>${getRoundOptions()}</select>` : ""}
         <input type="date" id="f-from" value="${filters.from}" title="Desde" />
         <input type="date" id="f-to" value="${filters.to}" title="Hasta" />
         <button class="btn btn-outline" id="btn-clear-filters" type="button">Limpiar filtros</button>
@@ -107,9 +119,12 @@ LH.views.matches = async function (root) {
     } else {
       filtered.forEach((m) => {
         const card = document.createElement("match-card");
-        card.homeTeam = teamsById[m.homeTeamId];
-        card.awayTeam = teamsById[m.awayTeamId];
+        const ht = teamsById[m.homeTeamId];
+        const at = teamsById[m.awayTeamId];
+        card.homeTeam = ht || { id: null, name: "Por definir", crest: "", colorPrimary: "#555", colorSecondary: "#fff" };
+        card.awayTeam = at || { id: null, name: "Por definir", crest: "", colorPrimary: "#555", colorSecondary: "#fff" };
         card.match = m;
+        card.roundLabel = m.roundLabel || "";
         card.addEventListener("lh:action", onCardAction);
         grid.appendChild(card);
       });
@@ -131,23 +146,49 @@ LH.views.matches = async function (root) {
       filters.to = e.target.value;
       paint();
     });
+    const fRound = root.querySelector("#f-round");
+    if (fRound) {
+      fRound.addEventListener("change", (e) => {
+        filters.round = e.target.value;
+        paint();
+      });
+    }
     root.querySelector("#btn-clear-filters").addEventListener("click", () => {
-      filters = { status: "", teamId: "", from: "", to: "" };
+      filters = { status: "", teamId: "", from: "", to: "", round: "" };
       paint();
     });
 
-    if (isLeagueMode) {
-      const newBtn = root.querySelector("#btn-new-match");
-      if (newBtn) {
-        newBtn.addEventListener("click", () => {
-          editingMatch = null;
-          renderForm();
-        });
-      }
-      const fixtureBtn = root.querySelector("#btn-generate-fixture");
-      if (fixtureBtn) {
-        fixtureBtn.addEventListener("click", onGenerateFixture);
-      }
+    const newBtn = root.querySelector("#btn-new-match");
+    if (newBtn) {
+      newBtn.addEventListener("click", () => {
+        editingMatch = null;
+        renderForm();
+      });
+    }
+    const fixtureBtn = root.querySelector("#btn-generate-fixture");
+    if (fixtureBtn) {
+      fixtureBtn.addEventListener("click", onGenerateFixture);
+    }
+    const bracketBtn = root.querySelector("#btn-generate-bracket");
+    if (bracketBtn) {
+      bracketBtn.addEventListener("click", onGenerateBracket);
+    }
+  }
+
+  async function onGenerateBracket() {
+    const ok = await LH.ui.confirm({
+      title: "Generar bracket",
+      message: `Se generarán ${league.bracketSize - 1} partidos para el torneo de eliminación directa.`,
+      confirmLabel: "Generar",
+    });
+    if (!ok) return;
+    try {
+      const count = await LH.bracket.generate(league.id);
+      LH.ui.toast(`Se generó el bracket con ${count} partidos`, "success");
+      await loadData();
+      paint();
+    } catch (err) {
+      LH.ui.toast(err.message || "No se pudo generar el bracket", "error");
     }
   }
 

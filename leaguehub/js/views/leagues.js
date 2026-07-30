@@ -19,8 +19,13 @@ LH.views.leagues = async function (root) {
     root.innerHTML = `
       <div class="lh-toolbar">
         <h2>Ligas</h2>
-        <button class="btn" id="btn-new-league" type="button">+ Nueva liga</button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline" id="btn-import-league" type="button">Importar JSON</button>
+          <button class="btn btn-outline" id="btn-seed-data" type="button">Datos de ejemplo</button>
+          <button class="btn" id="btn-new-league" type="button">+ Nueva liga</button>
+        </div>
       </div>
+      <input type="file" id="import-file-input" accept=".json" style="display:none" />
       <div id="league-form-container"></div>
       <div id="league-grid" class="lh-grid"></div>
     `;
@@ -45,6 +50,40 @@ LH.views.leagues = async function (root) {
       editingLeague = null;
       renderForm();
     });
+    root.querySelector("#btn-import-league").addEventListener("click", () => {
+      root.querySelector("#import-file-input").click();
+    });
+    root.querySelector("#import-file-input").addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        await LH.leagues.importLeague(text);
+        LH.ui.toast("Liga importada correctamente", "success");
+        refresh();
+      } catch (err) {
+        LH.ui.toast(err.message || "Error al importar", "error");
+      }
+      e.target.value = "";
+    });
+    const seedBtn = root.querySelector("#btn-seed-data");
+    if (seedBtn) {
+      seedBtn.addEventListener("click", async () => {
+        const ok = await LH.ui.confirm({
+          title: "Insertar datos de ejemplo",
+          message: "Se creará una liga de fútbol y un torneo de básquet con equipos, jugadores y partidos de prueba.",
+          confirmLabel: "Insertar",
+        });
+        if (!ok) return;
+        try {
+          await LH.seed.insertSampleData();
+          LH.ui.toast("Datos de ejemplo insertados", "success");
+          refresh();
+        } catch (err) {
+          LH.ui.toast(err.message || "Error al insertar datos de ejemplo", "error");
+        }
+      });
+    }
   }
 
   async function onCardAction(e) {
@@ -62,8 +101,19 @@ LH.views.leagues = async function (root) {
         LH.ui.toast(err.message || "No se pudo activar la liga", "error");
       }
     } else if (action === "export") {
-      // Fase 8: exportar liga completa a JSON.
-      LH.ui.toast("La exportación se agrega en una fase posterior", "success");
+      try {
+        const json = await LH.leagues.exportLeague(league.id);
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${league.name.replace(/\s+/g, "_")}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        LH.ui.toast(`Liga "${league.name}" exportada`, "success");
+      } catch (err) {
+        LH.ui.toast(err.message || "Error al exportar", "error");
+      }
     } else if (action === "delete") {
       const ok = await LH.ui.confirm({
         title: "Eliminar liga",

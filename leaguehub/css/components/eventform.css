@@ -1,0 +1,15 @@
+/* =========================================================
+   event-form
+   ========================================================= */
+
+.lh-event-form {
+  background: #ffffff;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.lh-event-form h3 {
+  margin-bottom: var(--space-3);
+}

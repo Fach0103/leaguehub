@@ -1,0 +1,8 @@
+.lh-stats > h2 {
+  margin-bottom: 4px;
+}
+
+.lh-stats h3 {
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-4);
+}

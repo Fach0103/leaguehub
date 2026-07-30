@@ -83,9 +83,13 @@ LH.players = (function () {
 
   /**
    * Bloquea la eliminación si el jugador tiene eventos registrados
-   * (sección 4.5.4). Se completa en Fase 4 cuando exista events.js.
+   * en partidos (sección 4.5.4).
    */
   async function remove(id) {
+    const hasEvents = await LH.events.hasEventsForPlayer(id);
+    if (hasEvents) {
+      throw new Error("No se puede eliminar: el jugador tiene anotaciones registradas en partidos.");
+    }
     return LH.db.delete(STORE, Number(id));
   }
 

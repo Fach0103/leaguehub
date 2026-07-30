@@ -189,5 +189,89 @@ LH.leagues = (function () {
     return all.find((l) => l.isActive) || null;
   }
 
-  return { create, getAll, getById, update, removeCascade, setActive, getActive };
+  async function exportLeague(id) {
+    id = Number(id);
+    const league = await getById(id);
+    if (!league) throw new Error("Liga no encontrada.");
+
+    const [teams, matches] = await Promise.all([
+      LH.teams.getByLeague(id),
+      LH.matches.getByLeague(id),
+    ]);
+
+    const teamIds = teams.map((t) => t.id);
+    const matchIds = matches.map((m) => m.id);
+    const players = (await Promise.all(teamIds.map((tid) => LH.players.getByTeam(tid)))).flat();
+    const events = (await Promise.all(matchIds.map((mid) => LH.events.getByMatch(mid)))).flat();
+
+    return JSON.stringify({ league, teams, players, matches, events }, null, 2);
+  }
+
+  async function importLeague(jsonStr) {
+    let data;
+    try {
+      data = JSON.parse(jsonStr);
+    } catch (e) {
+      throw new Error("El archivo JSON no es válido.");
+    }
+
+    if (!data.league || !data.league.name || !data.league.sport) {
+      throw new Error("Estructura JSON inválida: falta la liga o sus campos obligatorios.");
+    }
+
+    const allLeagues = await getAll();
+    const nameExists = allLeagues.some((l) => l.name.toLowerCase() === data.league.name.toLowerCase());
+    if (nameExists) {
+      throw new Error(`Ya existe una liga con el nombre "${data.league.name}". Renómbrala o cancela la importación.`);
+    }
+
+    delete data.league.id;
+    data.league.isActive = false;
+    data.league.createdAt = Date.now();
+
+    await LH.db.transaction(
+      ["leagues", "teams", "players", "matches", "events"],
+      "readwrite",
+      (stores) => {
+        const leagueReq = stores.leagues.add(data.league);
+        let leagueId;
+
+        leagueReq.onsuccess = () => {
+          leagueId = leagueReq.result;
+
+          const oldToNewTeam = {};
+          (data.teams || []).forEach((t) => {
+            const oldId = t.id;
+            delete t.id;
+            t.leagueId = leagueId;
+            const req = stores.teams.add(t);
+            req.onsuccess = () => { oldToNewTeam[oldId] = req.result; };
+          });
+
+          (data.matches || []).forEach((m) => {
+            const oldId = m.id;
+            delete m.id;
+            m.leagueId = leagueId;
+            if (m.homeTeamId) m.homeTeamId = oldToNewTeam[m.homeTeamId] || null;
+            if (m.awayTeamId) m.awayTeamId = oldToNewTeam[m.awayTeamId] || null;
+            if (m.nextMatchId) m.nextMatchId = null;
+            stores.matches.add(m);
+          });
+
+          (data.players || []).forEach((p) => {
+            delete p.id;
+            if (p.teamId) p.teamId = oldToNewTeam[p.teamId] || null;
+            stores.players.add(p);
+          });
+
+          (data.events || []).forEach((ev) => {
+            delete ev.id;
+            stores.events.add(ev);
+          });
+        };
+      }
+    );
+  }
+
+  return { create, getAll, getById, update, removeCascade, setActive, getActive, exportLeague, importLeague };
 })();

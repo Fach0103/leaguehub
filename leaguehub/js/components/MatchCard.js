@@ -23,6 +23,11 @@ class MatchCard extends HTMLElement {
     this.render();
   }
 
+  set roundLabel(value) {
+    this._roundLabel = value;
+    this.render();
+  }
+
   render() {
     const m = this._match;
     if (!m || !this._homeTeam || !this._awayTeam) return;
@@ -41,6 +46,7 @@ class MatchCard extends HTMLElement {
     });
 
     const statusLabel = m.status === "finished" ? "Finalizado" : "Programado";
+    const roundStr = this._roundLabel ? `<span class="lh-card__meta">${esc(this._roundLabel)}</span>` : "";
 
     this.innerHTML = `
       <article class="lh-card lh-match-card" tabindex="0" role="button">
@@ -51,6 +57,7 @@ class MatchCard extends HTMLElement {
         </div>
         <div class="lh-match-card__meta">
           <span>${esc(dateStr)}</span>
+          ${roundStr}
           <span class="lh-match-card__status lh-match-card__status--${m.status}">${statusLabel}</span>
         </div>
         <footer class="lh-card__actions">
