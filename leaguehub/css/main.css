@@ -1,8 +1,9 @@
 /* =========================================================
    LeagueHub — main.css
    Tokens de diseño base ("cascarón" de la app).
-   Los temas por deporte (Fase 7) sobreescriben --accent-*
-   a nivel de <body data-sport="futbol"> sin tocar este archivo.
+   Tema: negro + rojo con glassmorphism (paneles translúcidos +
+   blur + degradados). Los temas por deporte (Fase 7) sobreescriben
+   --signal/--signal-glow a nivel de <body data-sport="futbol">.
    ========================================================= */
 
 :root {
@@ -10,20 +11,27 @@
   --pitch-ink: #121212;      /* fondo oscuro neutral (marcador) */
   --turf: #1e1e1e80;         /* paneles secundarios (con alpha) */
   --turf-solid: #1e1e1e;
-  --chalk: #e0e0e0;          /* texto claro sobre fondo oscuro */
-  --chalk-dim: #888;         /* texto secundario sobre fondo oscuro */
-  --steel: #444;             /* bordes, divisores */
+  --chalk: #f0f0f0;          /* texto claro sobre fondo oscuro */
+  --chalk-dim: #a0a0a0;      /* texto secundario sobre fondo oscuro */
+  --steel: #555;             /* bordes, divisores sólidos (placeholders, etc.) */
   --signal: #c41e3a;         /* acento principal (rojo) */
+  --signal-glow: #ff3b52;    /* variante clara del acento, para degradados */
   --signal-dim: #c41e3a33;
   --gold: #e8b93b;           /* ganador / destacado */
-  --ink: #1c1c1c;            /* texto oscuro sobre fondo claro */
-  --paper: #eef0f1;          /* fondo de página */
-  --paper-line: #d5d5d5;     /* divisores sobre fondo claro */
+  --ink: #1c1c1c;            /* fondo sólido oscuro (botones, badges) */
+  --paper: #eef0f1;          /* referencia clara (no se usa como fondo de página) */
+  --paper-line: rgba(255, 255, 255, 0.14); /* bordes/divisores translúcidos (vidrio) */
   --danger: #c73e3e;
   --success: #2f8f5b;
 
+  /* --- Vidrio (glassmorphism) --- */
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-blur: 18px;
+
   /* --- Sombras --- */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.35);
 
   /* --- Tipografía --- */
   --font-display: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
@@ -38,8 +46,8 @@
   --space-5: 40px;
   --space-6: 64px;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
 
   --nav-height: 64px;
   --footer-height: 44px;
@@ -57,9 +65,17 @@ html, body {
 
 body {
   font-family: var(--font-body);
-  background: var(--paper);
-  color: var(--ink);
+  color: var(--chalk);
   -webkit-font-smoothing: antialiased;
+  /* Fondo con profundidad: base casi negra + dos resplandores rojos
+     fijos (no se mueven con el scroll) para que los paneles de vidrio
+     tengan algo de textura/color detrás para "atrapar" con el blur. */
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(ellipse 900px 600px at 15% -10%, rgba(196, 30, 58, 0.35), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(196, 30, 58, 0.18), transparent 55%),
+    linear-gradient(180deg, #141414 0%, #0a0a0a 40%, #0d0d0d 100%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4 {
@@ -68,7 +84,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.04em;
   font-weight: 700;
   margin: 0 0 var(--space-3) 0;
-  color: var(--ink);
+  color: var(--chalk);
 }
 
 h1 { font-size: 28px; }
@@ -99,46 +115,63 @@ button {
 }
 
 .view-empty {
-  border: 1px dashed var(--paper-line);
+  border: 1px dashed var(--glass-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
   text-align: center;
   color: var(--chalk-dim);
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
+/* --- Botones ---
+   Primario: degradado rojo con resplandor (glow).
+   Outline: vidrio translúcido, se ilumina en rojo al hover.
+   Ambos legibles sobre el fondo oscuro con blur del body. */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
+  border: 1px solid var(--signal);
+  background: linear-gradient(135deg, var(--signal-glow), var(--signal) 70%);
+  color: #fff;
   padding: 10px 18px;
   font-size: 13px;
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   border-radius: var(--radius-sm);
-  transition: transform 0.08s ease, background 0.15s ease;
+  box-shadow: 0 4px 18px var(--signal-dim);
+  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
 }
 
-.btn:hover { background: var(--signal); border-color: var(--signal); }
+.btn:hover { filter: brightness(1.12); box-shadow: 0 6px 24px var(--signal-dim); }
 .btn:active { transform: translateY(1px); }
 
 .btn-outline {
-  background: transparent;
-  color: var(--ink);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: var(--chalk);
+  box-shadow: none;
 }
-.btn-outline:hover { background: var(--ink); color: var(--paper); }
+.btn-outline:hover {
+  background: var(--glass-bg-strong);
+  border-color: var(--signal);
+  color: var(--chalk);
+}
 
 .btn-danger {
   background: var(--danger);
   border-color: var(--danger);
   color: #fff;
+  box-shadow: 0 4px 18px rgba(199, 62, 62, 0.35);
 }
 
-/* --- Identidad visual por deporte (Fase 7) — solo cambia el contenido, el nav siempre usa el rojo principal --- */
-body[data-sport="futbol"] { --signal: #2e7d32; --signal-dim: #2e7d3233; }
-body[data-sport="basquet"] { --signal: #e65100; --signal-dim: #e6510033; }
-body[data-sport="voley"] { --signal: #1565c0; --signal-dim: #1565c033; }
+/* --- Identidad visual por deporte (Fase 7) — el nav siempre usa el rojo principal,
+   el resto de los acentos (badges, bordes activos, botones) sí cambian --- */
+body[data-sport="futbol"] { --signal: #2e7d32; --signal-glow: #43a047; --signal-dim: #2e7d3233; }
+body[data-sport="basquet"] { --signal: #e65100; --signal-glow: #fb8c00; --signal-dim: #e6510033; }
+body[data-sport="voley"] { --signal: #1565c0; --signal-glow: #1e88e5; --signal-dim: #1565c033; }

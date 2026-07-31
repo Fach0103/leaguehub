@@ -4,7 +4,9 @@
    ========================================================= */
 
 .lh-card {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-3);

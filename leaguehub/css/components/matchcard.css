@@ -47,7 +47,7 @@
   justify-content: space-between;
   font-size: 11px;
   color: var(--chalk-dim);
-  color: #777;
+  color: var(--chalk-dim);
 }
 
 .lh-match-card__status {

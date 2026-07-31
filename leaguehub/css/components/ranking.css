@@ -1,5 +1,7 @@
 .lh-ranking {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-3);
@@ -24,12 +26,12 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: 11px;
-  color: #555;
+  color: var(--chalk-dim);
   padding: 8px 6px;
   text-align: left;
   border-bottom: 2px solid var(--paper-line);
   white-space: nowrap;
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .lh-ranking th:first-child { text-align: center; width: 28px; }
@@ -42,8 +44,8 @@
 }
 
 .lh-ranking tbody tr { cursor: pointer; transition: background 0.1s ease; }
-.lh-ranking tbody tr:nth-child(even) { background: #fafafa; }
-.lh-ranking tbody tr:hover { background: #f0f0f0; }
+.lh-ranking tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.03); }
+.lh-ranking tbody tr:hover { background: rgba(255, 255, 255, 0.08); }
 .lh-ranking tbody tr:last-child td { border-bottom: none; }
 
 .lh-ranking__pos {

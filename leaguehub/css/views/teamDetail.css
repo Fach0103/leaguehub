@@ -2,7 +2,9 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -47,7 +49,9 @@
 }
 
 .lh-team-detail__matches {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-2);
@@ -68,8 +72,8 @@
 }
 
 .lh-team-detail__match-row:last-child { border-bottom: none; }
-.lh-team-detail__match-row:nth-child(even) { background: #fafafa; }
-.lh-team-detail__match-row:hover { background: #f0f0f0; }
+.lh-team-detail__match-row:nth-child(even) { background: rgba(255, 255, 255, 0.03); }
+.lh-team-detail__match-row:hover { background: rgba(255, 255, 255, 0.08); }
 
 .result-win { border-left: 3px solid var(--success); }
 .result-draw { border-left: 3px solid var(--gold); }

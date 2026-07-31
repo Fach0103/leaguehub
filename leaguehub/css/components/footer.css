@@ -5,8 +5,10 @@
 league-footer {
   display: block;
   height: var(--footer-height);
-  background: var(--pitch-ink);
-  border-top: 1px solid var(--steel);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-top: 1px solid var(--glass-border);
 }
 
 .lh-footer {

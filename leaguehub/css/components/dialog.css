@@ -3,24 +3,29 @@
    ========================================================= */
 
 .lh-dialog {
-  border: none;
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
   width: min(360px, 90vw);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  background: rgba(28, 20, 20, 0.75);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  color: var(--chalk);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .lh-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
 }
 
 .lh-dialog__title {
   margin: 0 0 var(--space-2) 0;
+  color: var(--chalk);
 }
 
 .lh-dialog__message {
   color: var(--chalk-dim);
-  color: #555;
   font-size: 14px;
 }
 

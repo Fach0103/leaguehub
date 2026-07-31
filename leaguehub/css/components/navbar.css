@@ -1,5 +1,5 @@
 /* =========================================================
-   league-navbar — panel de marcador (oscuro + rojo)
+   league-navbar — panel de vidrio con degradado rojo + blur
    ========================================================= */
 
 league-navbar {
@@ -8,8 +8,11 @@ league-navbar {
   top: 0;
   z-index: 50;
   height: var(--nav-height);
-  background: var(--signal);
-  border-bottom: 3px solid #a0152e;
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.88), rgba(138, 15, 36, 0.88));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 .lh-nav {

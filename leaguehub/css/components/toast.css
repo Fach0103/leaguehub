@@ -21,12 +21,15 @@ toast-container {
 .lh-toast {
   font-family: var(--font-body);
   font-size: 13px;
-  color: #fff;
-  background: var(--ink);
-  border-left: 4px solid var(--success);
+  color: var(--chalk);
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-left: 3px solid var(--success);
   padding: 10px 16px;
   border-radius: var(--radius-sm);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.2s ease, transform 0.2s ease;

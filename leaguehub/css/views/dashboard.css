@@ -19,7 +19,9 @@
 }
 
 .lh-dash-card {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-3);
@@ -51,7 +53,9 @@
 }
 
 .lh-dash-standings {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-3);
@@ -75,11 +79,11 @@
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: 10px;
-  color: #555;
+  color: var(--chalk-dim);
   padding: 6px 4px;
   text-align: left;
   border-bottom: 1px solid var(--paper-line);
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .lh-dash-standings__table td {
@@ -93,7 +97,7 @@
   transition: background 0.1s;
 }
 
-.lh-dash-standings__table tr:hover { background: #f0f0f0; }
+.lh-dash-standings__table tr:hover { background: rgba(255, 255, 255, 0.08); }
 
 @media (max-width: 640px) {
   .lh-dash-cards { grid-template-columns: 1fr; }
