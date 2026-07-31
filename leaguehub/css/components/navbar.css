@@ -1,5 +1,5 @@
 /* =========================================================
-   league-navbar — panel tipo marcador de estadio
+   league-navbar — panel de marcador (oscuro + rojo)
    ========================================================= */
 
 league-navbar {
@@ -8,8 +8,8 @@ league-navbar {
   top: 0;
   z-index: 50;
   height: var(--nav-height);
-  background: var(--pitch-ink);
-  border-bottom: 3px solid var(--signal);
+  background: var(--signal);
+  border-bottom: 3px solid #a0152e;
 }
 
 .lh-nav {
@@ -24,7 +24,7 @@ league-navbar {
 
 .lh-nav__brand {
   font-family: var(--font-display);
-  color: var(--chalk);
+  color: #fff;
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
@@ -33,19 +33,19 @@ league-navbar {
   white-space: nowrap;
 }
 
-.lh-nav__brand span { color: var(--signal); }
+.lh-nav__brand span { color: #ffd700; }
 
-/* --- Display de "liga activa" estilo marcador --- */
+/* --- Display de "liga activa" --- */
 .lh-nav__active-league {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  background: var(--turf-solid);
-  border: 1px solid var(--steel);
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--radius-sm);
   padding: 6px 12px;
   font-family: var(--font-mono);
-  color: var(--chalk);
+  color: #fff;
   font-size: 12px;
   min-width: 0;
 }
@@ -54,9 +54,9 @@ league-navbar {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--signal);
+  background: #ffd700;
   flex-shrink: 0;
-  box-shadow: 0 0 6px var(--signal);
+  box-shadow: 0 0 6px #ffd70088;
 }
 
 .lh-nav__active-league .name {
@@ -67,8 +67,8 @@ league-navbar {
 }
 
 .lh-nav__active-league .sport {
-  color: var(--chalk-dim);
-  border-left: 1px solid var(--steel);
+  color: rgba(255,255,255,0.6);
+  border-left: 1px solid rgba(255,255,255,0.2);
   padding-left: var(--space-2);
 }
 
@@ -83,19 +83,19 @@ league-navbar {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--chalk-dim);
+  color: rgba(255,255,255,0.75);
   text-decoration: none;
   padding: 6px 2px;
   border-bottom: 2px solid transparent;
 }
 
 .lh-nav__links a:hover {
-  color: var(--chalk);
+  color: #fff;
 }
 
 .lh-nav__links a.is-active {
-  color: var(--chalk);
-  border-bottom-color: var(--signal);
+  color: #fff;
+  border-bottom-color: #fff;
 }
 
 @media (max-width: 720px) {

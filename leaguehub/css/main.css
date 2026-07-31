@@ -6,21 +6,24 @@
    ========================================================= */
 
 :root {
-  /* --- Paleta base (marcador deportivo nocturno) --- */
-  --pitch-ink: #0b1f17;      /* fondo principal, cancha de noche */
-  --turf: #16302280;         /* paneles secundarios (con alpha) */
-  --turf-solid: #16302f;
-  --chalk: #f1eee4;          /* texto claro / líneas de cancha */
-  --chalk-dim: #c9c4b4;      /* texto secundario sobre fondo oscuro */
-  --steel: #3e5c76;          /* bordes, divisores */
-  --signal: #ff4b2e;         /* acento principal (naranja señal) */
-  --signal-dim: #ff4b2e33;
+  /* --- Paleta principal: oscuro + rojo (marcador deportivo) --- */
+  --pitch-ink: #121212;      /* fondo oscuro neutral (marcador) */
+  --turf: #1e1e1e80;         /* paneles secundarios (con alpha) */
+  --turf-solid: #1e1e1e;
+  --chalk: #e0e0e0;          /* texto claro sobre fondo oscuro */
+  --chalk-dim: #888;         /* texto secundario sobre fondo oscuro */
+  --steel: #444;             /* bordes, divisores */
+  --signal: #c41e3a;         /* acento principal (rojo) */
+  --signal-dim: #c41e3a33;
   --gold: #e8b93b;           /* ganador / destacado */
-  --ink: #14201b;            /* texto oscuro sobre fondo claro */
-  --paper: #faf9f5;          /* fondo de contenido (vistas) */
-  --paper-line: #ded9c9;     /* divisores sobre fondo claro */
+  --ink: #1c1c1c;            /* texto oscuro sobre fondo claro */
+  --paper: #eef0f1;          /* fondo de página */
+  --paper-line: #d5d5d5;     /* divisores sobre fondo claro */
   --danger: #c73e3e;
   --success: #2f8f5b;
+
+  /* --- Sombras --- */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
 
   /* --- Tipografía --- */
   --font-display: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
@@ -135,10 +138,7 @@ button {
   color: #fff;
 }
 
-/* --- Identidad visual por deporte (Fase 7) --- */
+/* --- Identidad visual por deporte (Fase 7) — solo cambia el contenido, el nav siempre usa el rojo principal --- */
 body[data-sport="futbol"] { --signal: #2e7d32; --signal-dim: #2e7d3233; }
 body[data-sport="basquet"] { --signal: #e65100; --signal-dim: #e6510033; }
 body[data-sport="voley"] { --signal: #1565c0; --signal-dim: #1565c033; }
-body[data-sport="futbol"] .lh-nav { border-bottom-color: var(--signal); }
-body[data-sport="basquet"] .lh-nav { border-bottom-color: var(--signal); }
-body[data-sport="voley"] .lh-nav { border-bottom-color: var(--signal); }

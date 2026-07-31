@@ -8,6 +8,7 @@
   padding: var(--space-4);
   margin-bottom: var(--space-4);
   flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
 }
 
 .lh-player-detail__photo {
@@ -41,6 +42,7 @@
   border-radius: var(--radius-md);
   padding: var(--space-2);
   margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
 }
 
 .lh-player-detail__match-row {
@@ -56,6 +58,7 @@
 }
 
 .lh-player-detail__match-row:last-child { border-bottom: none; }
-.lh-player-detail__match-row:hover { background: #f5f4f0; }
+.lh-player-detail__match-row:nth-child(even) { background: #fafafa; }
+.lh-player-detail__match-row:hover { background: #f0f0f0; }
 
 .lh-player-detail h3 { margin-top: var(--space-4); }

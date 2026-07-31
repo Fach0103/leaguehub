@@ -4,8 +4,8 @@ Aplicación web SPA para gestionar ligas deportivas amateur, construida con HTML
 
 ## Integrantes
 
-- **[Nombre Integrante A]**
-- **[Nombre Integrante B]**
+- Abraham Chourio
+-
 
 ### División del Trabajo
 

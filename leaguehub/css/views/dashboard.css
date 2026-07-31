@@ -23,6 +23,7 @@
   border: 1px solid var(--paper-line);
   border-radius: var(--radius-md);
   padding: var(--space-3);
+  box-shadow: var(--shadow-sm);
 }
 
 .lh-dash-card__match {
@@ -55,6 +56,7 @@
   border-radius: var(--radius-md);
   padding: var(--space-3);
   margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
 }
 
 .lh-dash-standings h3 {
@@ -73,10 +75,11 @@
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: 10px;
-  color: #777;
+  color: #555;
   padding: 6px 4px;
   text-align: left;
   border-bottom: 1px solid var(--paper-line);
+  background: #f5f5f5;
 }
 
 .lh-dash-standings__table td {
@@ -90,7 +93,7 @@
   transition: background 0.1s;
 }
 
-.lh-dash-standings__table tr:hover { background: #f5f4f0; }
+.lh-dash-standings__table tr:hover { background: #f0f0f0; }
 
 @media (max-width: 640px) {
   .lh-dash-cards { grid-template-columns: 1fr; }

@@ -1,0 +1,114 @@
+{
+  "league": {
+    "name": "Liga Test Export",
+    "sport": "futbol",
+    "mode": "league",
+    "season": "2026-I",
+    "description": "",
+    "roundTrip": false,
+    "bracketSize": null,
+    "isActive": false,
+    "createdAt": 1785453158642,
+    "id": 1
+  },
+  "teams": [
+    {
+      "leagueId": 1,
+      "name": "Equipo A",
+      "crest": "",
+      "colorPrimary": "#333333",
+      "colorSecondary": "#ffffff",
+      "city": "",
+      "stats": {
+        "pj": 1,
+        "pg": 1,
+        "pe": 0,
+        "pp": 0,
+        "pf": 2,
+        "pc": 1
+      },
+      "id": 1
+    },
+    {
+      "leagueId": 1,
+      "name": "Equipo B",
+      "crest": "",
+      "colorPrimary": "#333333",
+      "colorSecondary": "#ffffff",
+      "city": "",
+      "stats": {
+        "pj": 1,
+        "pg": 0,
+        "pe": 0,
+        "pp": 1,
+        "pf": 1,
+        "pc": 2
+      },
+      "id": 2
+    }
+  ],
+  "players": [
+    {
+      "teamId": 1,
+      "name": "Jugador Uno",
+      "photo": "",
+      "position": "",
+      "number": 9,
+      "stats": {
+        "pj": 1,
+        "goals": 2
+      },
+      "id": 1
+    },
+    {
+      "teamId": 2,
+      "name": "Jugador Dos",
+      "photo": "",
+      "position": "",
+      "number": 7,
+      "stats": {
+        "pj": 1,
+        "goals": 1
+      },
+      "id": 2
+    }
+  ],
+  "matches": [
+    {
+      "leagueId": 1,
+      "homeTeamId": 1,
+      "awayTeamId": 2,
+      "date": 1785453158655,
+      "status": "finished",
+      "homeScore": 2,
+      "awayScore": 1,
+      "round": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null,
+      "id": 1
+    }
+  ],
+  "events": [
+    {
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 10,
+      "id": 1
+    },
+    {
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 55,
+      "id": 2
+    },
+    {
+      "matchId": 1,
+      "teamId": 2,
+      "playerId": 2,
+      "minute": 30,
+      "id": 3
+    }
+  ]
+}

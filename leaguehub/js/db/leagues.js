@@ -234,39 +234,102 @@ LH.leagues = (function () {
       "readwrite",
       (stores) => {
         const leagueReq = stores.leagues.add(data.league);
-        let leagueId;
 
         leagueReq.onsuccess = () => {
-          leagueId = leagueReq.result;
-
+          const leagueId = leagueReq.result;
           const oldToNewTeam = {};
-          (data.teams || []).forEach((t) => {
+          const oldToNewPlayer = {};
+          const oldToNewMatch = {};
+
+          const teamsToImport = data.teams || [];
+          const playersToImport = data.players || [];
+          const matchesToImport = data.matches || [];
+          const eventsToImport = data.events || [];
+
+          // Cadena de dependencias real: liga -> equipos -> (jugadores Y
+          // partidos, en paralelo) -> eventos. Cada nivel necesita los IDs
+          // NUEVOS que recién se conocen cuando el add() anterior resuelve
+          // (es asíncrono), así que hay que esperar explícitamente a que
+          // cada nivel termine antes de usar su mapa de IDs viejo->nuevo.
+          // (Bug real que encontramos probando la importación: sin esto,
+          // todo quedaba con teamId/matchId/playerId en null.)
+
+          function insertEvents() {
+            eventsToImport.forEach((ev) => {
+              delete ev.id;
+              const newMatchId = oldToNewMatch[ev.matchId];
+              const newPlayerId = oldToNewPlayer[ev.playerId];
+              const newTeamId = oldToNewTeam[ev.teamId];
+              // Si el partido o el jugador no se pudieron remapear (datos
+              // corruptos en el JSON), se omite el evento en vez de
+              // insertar basura con referencias rotas.
+              if (!newMatchId || !newPlayerId || !newTeamId) return;
+              stores.events.add({
+                matchId: newMatchId,
+                playerId: newPlayerId,
+                teamId: newTeamId,
+                minute: ev.minute !== undefined ? ev.minute : null,
+              });
+            });
+          }
+
+          function afterTeamsInserted() {
+            let pendingPlayers = playersToImport.length;
+            let pendingMatches = matchesToImport.length;
+
+            function maybeInsertEvents() {
+              if (pendingPlayers === 0 && pendingMatches === 0) insertEvents();
+            }
+
+            if (pendingPlayers === 0 && pendingMatches === 0) {
+              insertEvents();
+              return;
+            }
+
+            playersToImport.forEach((p) => {
+              const oldId = p.id;
+              delete p.id;
+              p.teamId = p.teamId ? oldToNewTeam[p.teamId] || null : null;
+              const req = stores.players.add(p);
+              req.onsuccess = () => {
+                oldToNewPlayer[oldId] = req.result;
+                pendingPlayers--;
+                maybeInsertEvents();
+              };
+            });
+
+            matchesToImport.forEach((m) => {
+              const oldId = m.id;
+              delete m.id;
+              m.leagueId = leagueId;
+              m.homeTeamId = m.homeTeamId ? oldToNewTeam[m.homeTeamId] || null : null;
+              m.awayTeamId = m.awayTeamId ? oldToNewTeam[m.awayTeamId] || null : null;
+              m.nextMatchId = null; // se recalcula si en el futuro se reconstruye el bracket
+              const req = stores.matches.add(m);
+              req.onsuccess = () => {
+                oldToNewMatch[oldId] = req.result;
+                pendingMatches--;
+                maybeInsertEvents();
+              };
+            });
+          }
+
+          let pendingTeams = teamsToImport.length;
+          if (pendingTeams === 0) {
+            afterTeamsInserted();
+            return;
+          }
+
+          teamsToImport.forEach((t) => {
             const oldId = t.id;
             delete t.id;
             t.leagueId = leagueId;
             const req = stores.teams.add(t);
-            req.onsuccess = () => { oldToNewTeam[oldId] = req.result; };
-          });
-
-          (data.matches || []).forEach((m) => {
-            const oldId = m.id;
-            delete m.id;
-            m.leagueId = leagueId;
-            if (m.homeTeamId) m.homeTeamId = oldToNewTeam[m.homeTeamId] || null;
-            if (m.awayTeamId) m.awayTeamId = oldToNewTeam[m.awayTeamId] || null;
-            if (m.nextMatchId) m.nextMatchId = null;
-            stores.matches.add(m);
-          });
-
-          (data.players || []).forEach((p) => {
-            delete p.id;
-            if (p.teamId) p.teamId = oldToNewTeam[p.teamId] || null;
-            stores.players.add(p);
-          });
-
-          (data.events || []).forEach((ev) => {
-            delete ev.id;
-            stores.events.add(ev);
+            req.onsuccess = () => {
+              oldToNewTeam[oldId] = req.result;
+              pendingTeams--;
+              if (pendingTeams === 0) afterTeamsInserted();
+            };
           });
         };
       }
