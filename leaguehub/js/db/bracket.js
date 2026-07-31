@@ -39,11 +39,11 @@ LH.bracket = (function () {
     const teamIds = teams.map((t) => t.id).sort(() => Math.random() - 0.5);
     const numRounds = Math.log2(league.bracketSize);
     const baseDate = Date.now() + WEEK_MS;
+    const total = league.bracketSize - 1;
 
     await LH.db.transaction(["matches"], "readwrite", (stores) => {
       const idMap = {};
       let totalCreated = 0;
-      const total = league.bracketSize - 1;
 
       for (let round = numRounds; round >= 1; round--) {
         const matchesInRound = Math.pow(2, numRounds - round);

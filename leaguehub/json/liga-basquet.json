@@ -1,0 +1,3829 @@
+{
+  "league": {
+    "id": 1,
+    "name": "Liga Nacional de Básquet",
+    "sport": "basquet",
+    "mode": "league",
+    "season": "2026",
+    "description": "Temporada 2026 de la liga de básquet de primera división.",
+    "roundTrip": false,
+    "bracketSize": null,
+    "isActive": false,
+    "createdAt": 1781964000000
+  },
+  "teams": [
+    {
+      "id": 1,
+      "leagueId": 1,
+      "name": "Dragones",
+      "crest": "",
+      "colorPrimary": "#e65100",
+      "colorSecondary": "#ffffff",
+      "city": "Buenos Aires",
+      "stats": {
+        "pj": 2,
+        "pg": 2,
+        "pe": 0,
+        "pp": 0,
+        "pf": 183,
+        "pc": 161
+      }
+    },
+    {
+      "id": 2,
+      "leagueId": 1,
+      "name": "Leones",
+      "crest": "",
+      "colorPrimary": "#1565c0",
+      "colorSecondary": "#ffffff",
+      "city": "La Plata",
+      "stats": {
+        "pj": 1,
+        "pg": 0,
+        "pe": 0,
+        "pp": 1,
+        "pf": 79,
+        "pc": 82
+      }
+    },
+    {
+      "id": 3,
+      "leagueId": 1,
+      "name": "Panteras",
+      "crest": "",
+      "colorPrimary": "#2e7d32",
+      "colorSecondary": "#ffffff",
+      "city": "Córdoba",
+      "stats": {
+        "pj": 2,
+        "pg": 1,
+        "pe": 0,
+        "pp": 1,
+        "pf": 172,
+        "pc": 174
+      }
+    },
+    {
+      "id": 4,
+      "leagueId": 1,
+      "name": "Zorros",
+      "crest": "",
+      "colorPrimary": "#6a1b9a",
+      "colorSecondary": "#ffffff",
+      "city": "Rosario",
+      "stats": {
+        "pj": 1,
+        "pg": 0,
+        "pe": 0,
+        "pp": 1,
+        "pf": 71,
+        "pc": 88
+      }
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "leagueId": 1,
+      "homeTeamId": 1,
+      "awayTeamId": 4,
+      "date": 1783209600000,
+      "status": "finished",
+      "homeScore": 88,
+      "awayScore": 71,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    },
+    {
+      "id": 2,
+      "leagueId": 1,
+      "homeTeamId": 2,
+      "awayTeamId": 3,
+      "date": 1783215900000,
+      "status": "finished",
+      "homeScore": 79,
+      "awayScore": 82,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    },
+    {
+      "id": 3,
+      "leagueId": 1,
+      "homeTeamId": 1,
+      "awayTeamId": 3,
+      "date": 1783814400000,
+      "status": "finished",
+      "homeScore": 95,
+      "awayScore": 90,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    },
+    {
+      "id": 4,
+      "leagueId": 1,
+      "homeTeamId": 2,
+      "awayTeamId": 4,
+      "date": 1783820700000,
+      "status": "scheduled",
+      "homeScore": null,
+      "awayScore": null,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    },
+    {
+      "id": 5,
+      "leagueId": 1,
+      "homeTeamId": 1,
+      "awayTeamId": 2,
+      "date": 1784419200000,
+      "status": "scheduled",
+      "homeScore": null,
+      "awayScore": null,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    },
+    {
+      "id": 6,
+      "leagueId": 1,
+      "homeTeamId": 3,
+      "awayTeamId": 4,
+      "date": 1784425500000,
+      "status": "scheduled",
+      "homeScore": null,
+      "awayScore": null,
+      "round": null,
+      "roundLabel": null,
+      "nextMatchId": null,
+      "nextMatchSlot": null
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 1
+    },
+    {
+      "id": 2,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 2
+    },
+    {
+      "id": 3,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 3
+    },
+    {
+      "id": 4,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 4
+    },
+    {
+      "id": 5,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 5
+    },
+    {
+      "id": 6,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 6
+    },
+    {
+      "id": 7,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 7
+    },
+    {
+      "id": 8,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 8
+    },
+    {
+      "id": 9,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 9
+    },
+    {
+      "id": 10,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 10
+    },
+    {
+      "id": 11,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 11
+    },
+    {
+      "id": 12,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 12
+    },
+    {
+      "id": 13,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 13
+    },
+    {
+      "id": 14,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 14
+    },
+    {
+      "id": 15,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 15
+    },
+    {
+      "id": 16,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 16
+    },
+    {
+      "id": 17,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 17
+    },
+    {
+      "id": 18,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 18
+    },
+    {
+      "id": 19,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 19
+    },
+    {
+      "id": 20,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 20
+    },
+    {
+      "id": 21,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 21
+    },
+    {
+      "id": 22,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 22
+    },
+    {
+      "id": 23,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 23
+    },
+    {
+      "id": 24,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 24
+    },
+    {
+      "id": 25,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 25
+    },
+    {
+      "id": 26,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 26
+    },
+    {
+      "id": 27,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 27
+    },
+    {
+      "id": 28,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 28
+    },
+    {
+      "id": 29,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 29
+    },
+    {
+      "id": 30,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 30
+    },
+    {
+      "id": 31,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 31
+    },
+    {
+      "id": 32,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 32
+    },
+    {
+      "id": 33,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 33
+    },
+    {
+      "id": 34,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 34
+    },
+    {
+      "id": 35,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 35
+    },
+    {
+      "id": 36,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 36
+    },
+    {
+      "id": 37,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 37
+    },
+    {
+      "id": 38,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 38
+    },
+    {
+      "id": 39,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 39
+    },
+    {
+      "id": 40,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 40
+    },
+    {
+      "id": 41,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 1
+    },
+    {
+      "id": 42,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 2
+    },
+    {
+      "id": 43,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 3
+    },
+    {
+      "id": 44,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 4
+    },
+    {
+      "id": 45,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 5
+    },
+    {
+      "id": 46,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 6
+    },
+    {
+      "id": 47,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 7
+    },
+    {
+      "id": 48,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 8
+    },
+    {
+      "id": 49,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 9
+    },
+    {
+      "id": 50,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 10
+    },
+    {
+      "id": 51,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 11
+    },
+    {
+      "id": 52,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 12
+    },
+    {
+      "id": 53,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 13
+    },
+    {
+      "id": 54,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 14
+    },
+    {
+      "id": 55,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 15
+    },
+    {
+      "id": 56,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 16
+    },
+    {
+      "id": 57,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 17
+    },
+    {
+      "id": 58,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 18
+    },
+    {
+      "id": 59,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 19
+    },
+    {
+      "id": 60,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 20
+    },
+    {
+      "id": 61,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 21
+    },
+    {
+      "id": 62,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 22
+    },
+    {
+      "id": 63,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 23
+    },
+    {
+      "id": 64,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 24
+    },
+    {
+      "id": 65,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 25
+    },
+    {
+      "id": 66,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 26
+    },
+    {
+      "id": 67,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 27
+    },
+    {
+      "id": 68,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 28
+    },
+    {
+      "id": 69,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 29
+    },
+    {
+      "id": 70,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 30
+    },
+    {
+      "id": 71,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 31
+    },
+    {
+      "id": 72,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 32
+    },
+    {
+      "id": 73,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 33
+    },
+    {
+      "id": 74,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 34
+    },
+    {
+      "id": 75,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 35
+    },
+    {
+      "id": 76,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 36
+    },
+    {
+      "id": 77,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 37
+    },
+    {
+      "id": 78,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 38
+    },
+    {
+      "id": 79,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 39
+    },
+    {
+      "id": 80,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 40
+    },
+    {
+      "id": 81,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 1
+    },
+    {
+      "id": 82,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 2
+    },
+    {
+      "id": 83,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 3
+    },
+    {
+      "id": 84,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 4
+    },
+    {
+      "id": 85,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 5
+    },
+    {
+      "id": 86,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 6
+    },
+    {
+      "id": 87,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 7
+    },
+    {
+      "id": 88,
+      "matchId": 1,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 8
+    },
+    {
+      "id": 89,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 1
+    },
+    {
+      "id": 90,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 2
+    },
+    {
+      "id": 91,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 3
+    },
+    {
+      "id": 92,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 4
+    },
+    {
+      "id": 93,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 5
+    },
+    {
+      "id": 94,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 6
+    },
+    {
+      "id": 95,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 7
+    },
+    {
+      "id": 96,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 8
+    },
+    {
+      "id": 97,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 9
+    },
+    {
+      "id": 98,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 10
+    },
+    {
+      "id": 99,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 11
+    },
+    {
+      "id": 100,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 12
+    },
+    {
+      "id": 101,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 13
+    },
+    {
+      "id": 102,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 14
+    },
+    {
+      "id": 103,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 15
+    },
+    {
+      "id": 104,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 16
+    },
+    {
+      "id": 105,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 17
+    },
+    {
+      "id": 106,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 18
+    },
+    {
+      "id": 107,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 19
+    },
+    {
+      "id": 108,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 20
+    },
+    {
+      "id": 109,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 21
+    },
+    {
+      "id": 110,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 22
+    },
+    {
+      "id": 111,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 23
+    },
+    {
+      "id": 112,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 24
+    },
+    {
+      "id": 113,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 25
+    },
+    {
+      "id": 114,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 26
+    },
+    {
+      "id": 115,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 27
+    },
+    {
+      "id": 116,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 28
+    },
+    {
+      "id": 117,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 29
+    },
+    {
+      "id": 118,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 30
+    },
+    {
+      "id": 119,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 31
+    },
+    {
+      "id": 120,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 32
+    },
+    {
+      "id": 121,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 33
+    },
+    {
+      "id": 122,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 34
+    },
+    {
+      "id": 123,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 35
+    },
+    {
+      "id": 124,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 36
+    },
+    {
+      "id": 125,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 37
+    },
+    {
+      "id": 126,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 38
+    },
+    {
+      "id": 127,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 39
+    },
+    {
+      "id": 128,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 40
+    },
+    {
+      "id": 129,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 1
+    },
+    {
+      "id": 130,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 2
+    },
+    {
+      "id": 131,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 3
+    },
+    {
+      "id": 132,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 4
+    },
+    {
+      "id": 133,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 5
+    },
+    {
+      "id": 134,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 6
+    },
+    {
+      "id": 135,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 7
+    },
+    {
+      "id": 136,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 8
+    },
+    {
+      "id": 137,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 9
+    },
+    {
+      "id": 138,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 10
+    },
+    {
+      "id": 139,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 11
+    },
+    {
+      "id": 140,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 12
+    },
+    {
+      "id": 141,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 13
+    },
+    {
+      "id": 142,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 14
+    },
+    {
+      "id": 143,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 15
+    },
+    {
+      "id": 144,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 16
+    },
+    {
+      "id": 145,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 17
+    },
+    {
+      "id": 146,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 18
+    },
+    {
+      "id": 147,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 19
+    },
+    {
+      "id": 148,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 20
+    },
+    {
+      "id": 149,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 21
+    },
+    {
+      "id": 150,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 22
+    },
+    {
+      "id": 151,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 23
+    },
+    {
+      "id": 152,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 24
+    },
+    {
+      "id": 153,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 25
+    },
+    {
+      "id": 154,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 26
+    },
+    {
+      "id": 155,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 27
+    },
+    {
+      "id": 156,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 28
+    },
+    {
+      "id": 157,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 29
+    },
+    {
+      "id": 158,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 10,
+      "minute": 30
+    },
+    {
+      "id": 159,
+      "matchId": 1,
+      "teamId": 4,
+      "playerId": 9,
+      "minute": 31
+    },
+    {
+      "id": 160,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 1
+    },
+    {
+      "id": 161,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 2
+    },
+    {
+      "id": 162,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 3
+    },
+    {
+      "id": 163,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 4
+    },
+    {
+      "id": 164,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 5
+    },
+    {
+      "id": 165,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 6
+    },
+    {
+      "id": 166,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 7
+    },
+    {
+      "id": 167,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 8
+    },
+    {
+      "id": 168,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 9
+    },
+    {
+      "id": 169,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 10
+    },
+    {
+      "id": 170,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 11
+    },
+    {
+      "id": 171,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 12
+    },
+    {
+      "id": 172,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 13
+    },
+    {
+      "id": 173,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 14
+    },
+    {
+      "id": 174,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 15
+    },
+    {
+      "id": 175,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 16
+    },
+    {
+      "id": 176,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 17
+    },
+    {
+      "id": 177,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 18
+    },
+    {
+      "id": 178,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 19
+    },
+    {
+      "id": 179,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 20
+    },
+    {
+      "id": 180,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 21
+    },
+    {
+      "id": 181,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 22
+    },
+    {
+      "id": 182,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 23
+    },
+    {
+      "id": 183,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 24
+    },
+    {
+      "id": 184,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 25
+    },
+    {
+      "id": 185,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 26
+    },
+    {
+      "id": 186,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 27
+    },
+    {
+      "id": 187,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 28
+    },
+    {
+      "id": 188,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 29
+    },
+    {
+      "id": 189,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 30
+    },
+    {
+      "id": 190,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 31
+    },
+    {
+      "id": 191,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 32
+    },
+    {
+      "id": 192,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 33
+    },
+    {
+      "id": 193,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 34
+    },
+    {
+      "id": 194,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 35
+    },
+    {
+      "id": 195,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 36
+    },
+    {
+      "id": 196,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 37
+    },
+    {
+      "id": 197,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 38
+    },
+    {
+      "id": 198,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 39
+    },
+    {
+      "id": 199,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 40
+    },
+    {
+      "id": 200,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 1
+    },
+    {
+      "id": 201,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 2
+    },
+    {
+      "id": 202,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 3
+    },
+    {
+      "id": 203,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 4
+    },
+    {
+      "id": 204,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 5
+    },
+    {
+      "id": 205,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 6
+    },
+    {
+      "id": 206,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 7
+    },
+    {
+      "id": 207,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 8
+    },
+    {
+      "id": 208,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 9
+    },
+    {
+      "id": 209,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 10
+    },
+    {
+      "id": 210,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 11
+    },
+    {
+      "id": 211,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 12
+    },
+    {
+      "id": 212,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 13
+    },
+    {
+      "id": 213,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 14
+    },
+    {
+      "id": 214,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 15
+    },
+    {
+      "id": 215,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 16
+    },
+    {
+      "id": 216,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 17
+    },
+    {
+      "id": 217,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 18
+    },
+    {
+      "id": 218,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 19
+    },
+    {
+      "id": 219,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 20
+    },
+    {
+      "id": 220,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 21
+    },
+    {
+      "id": 221,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 22
+    },
+    {
+      "id": 222,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 23
+    },
+    {
+      "id": 223,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 24
+    },
+    {
+      "id": 224,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 25
+    },
+    {
+      "id": 225,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 26
+    },
+    {
+      "id": 226,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 27
+    },
+    {
+      "id": 227,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 28
+    },
+    {
+      "id": 228,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 29
+    },
+    {
+      "id": 229,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 30
+    },
+    {
+      "id": 230,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 31
+    },
+    {
+      "id": 231,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 32
+    },
+    {
+      "id": 232,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 33
+    },
+    {
+      "id": 233,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 34
+    },
+    {
+      "id": 234,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 35
+    },
+    {
+      "id": 235,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 36
+    },
+    {
+      "id": 236,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 37
+    },
+    {
+      "id": 237,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 5,
+      "minute": 38
+    },
+    {
+      "id": 238,
+      "matchId": 2,
+      "teamId": 2,
+      "playerId": 4,
+      "minute": 39
+    },
+    {
+      "id": 239,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 1
+    },
+    {
+      "id": 240,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 2
+    },
+    {
+      "id": 241,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 3
+    },
+    {
+      "id": 242,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 4
+    },
+    {
+      "id": 243,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 5
+    },
+    {
+      "id": 244,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 6
+    },
+    {
+      "id": 245,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 7
+    },
+    {
+      "id": 246,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 8
+    },
+    {
+      "id": 247,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 9
+    },
+    {
+      "id": 248,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 10
+    },
+    {
+      "id": 249,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 11
+    },
+    {
+      "id": 250,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 12
+    },
+    {
+      "id": 251,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 13
+    },
+    {
+      "id": 252,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 14
+    },
+    {
+      "id": 253,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 15
+    },
+    {
+      "id": 254,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 16
+    },
+    {
+      "id": 255,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 17
+    },
+    {
+      "id": 256,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 18
+    },
+    {
+      "id": 257,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 19
+    },
+    {
+      "id": 258,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 20
+    },
+    {
+      "id": 259,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 21
+    },
+    {
+      "id": 260,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 22
+    },
+    {
+      "id": 261,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 23
+    },
+    {
+      "id": 262,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 24
+    },
+    {
+      "id": 263,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 25
+    },
+    {
+      "id": 264,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 26
+    },
+    {
+      "id": 265,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 27
+    },
+    {
+      "id": 266,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 28
+    },
+    {
+      "id": 267,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 29
+    },
+    {
+      "id": 268,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 30
+    },
+    {
+      "id": 269,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 31
+    },
+    {
+      "id": 270,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 32
+    },
+    {
+      "id": 271,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 33
+    },
+    {
+      "id": 272,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 34
+    },
+    {
+      "id": 273,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 35
+    },
+    {
+      "id": 274,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 36
+    },
+    {
+      "id": 275,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 37
+    },
+    {
+      "id": 276,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 38
+    },
+    {
+      "id": 277,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 39
+    },
+    {
+      "id": 278,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 40
+    },
+    {
+      "id": 279,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 1
+    },
+    {
+      "id": 280,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 2
+    },
+    {
+      "id": 281,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 3
+    },
+    {
+      "id": 282,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 4
+    },
+    {
+      "id": 283,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 5
+    },
+    {
+      "id": 284,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 6
+    },
+    {
+      "id": 285,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 7
+    },
+    {
+      "id": 286,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 8
+    },
+    {
+      "id": 287,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 9
+    },
+    {
+      "id": 288,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 10
+    },
+    {
+      "id": 289,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 11
+    },
+    {
+      "id": 290,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 12
+    },
+    {
+      "id": 291,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 13
+    },
+    {
+      "id": 292,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 14
+    },
+    {
+      "id": 293,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 15
+    },
+    {
+      "id": 294,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 16
+    },
+    {
+      "id": 295,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 17
+    },
+    {
+      "id": 296,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 18
+    },
+    {
+      "id": 297,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 19
+    },
+    {
+      "id": 298,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 20
+    },
+    {
+      "id": 299,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 21
+    },
+    {
+      "id": 300,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 22
+    },
+    {
+      "id": 301,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 23
+    },
+    {
+      "id": 302,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 24
+    },
+    {
+      "id": 303,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 25
+    },
+    {
+      "id": 304,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 26
+    },
+    {
+      "id": 305,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 27
+    },
+    {
+      "id": 306,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 28
+    },
+    {
+      "id": 307,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 29
+    },
+    {
+      "id": 308,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 30
+    },
+    {
+      "id": 309,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 31
+    },
+    {
+      "id": 310,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 32
+    },
+    {
+      "id": 311,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 33
+    },
+    {
+      "id": 312,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 34
+    },
+    {
+      "id": 313,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 35
+    },
+    {
+      "id": 314,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 36
+    },
+    {
+      "id": 315,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 37
+    },
+    {
+      "id": 316,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 38
+    },
+    {
+      "id": 317,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 39
+    },
+    {
+      "id": 318,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 40
+    },
+    {
+      "id": 319,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 1
+    },
+    {
+      "id": 320,
+      "matchId": 2,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 2
+    },
+    {
+      "id": 321,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 1
+    },
+    {
+      "id": 322,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 2
+    },
+    {
+      "id": 323,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 3
+    },
+    {
+      "id": 324,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 4
+    },
+    {
+      "id": 325,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 5
+    },
+    {
+      "id": 326,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 6
+    },
+    {
+      "id": 327,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 7
+    },
+    {
+      "id": 328,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 8
+    },
+    {
+      "id": 329,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 9
+    },
+    {
+      "id": 330,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 10
+    },
+    {
+      "id": 331,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 11
+    },
+    {
+      "id": 332,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 12
+    },
+    {
+      "id": 333,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 13
+    },
+    {
+      "id": 334,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 14
+    },
+    {
+      "id": 335,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 15
+    },
+    {
+      "id": 336,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 16
+    },
+    {
+      "id": 337,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 17
+    },
+    {
+      "id": 338,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 18
+    },
+    {
+      "id": 339,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 19
+    },
+    {
+      "id": 340,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 20
+    },
+    {
+      "id": 341,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 21
+    },
+    {
+      "id": 342,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 22
+    },
+    {
+      "id": 343,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 23
+    },
+    {
+      "id": 344,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 24
+    },
+    {
+      "id": 345,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 25
+    },
+    {
+      "id": 346,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 26
+    },
+    {
+      "id": 347,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 27
+    },
+    {
+      "id": 348,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 28
+    },
+    {
+      "id": 349,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 29
+    },
+    {
+      "id": 350,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 30
+    },
+    {
+      "id": 351,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 31
+    },
+    {
+      "id": 352,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 32
+    },
+    {
+      "id": 353,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 33
+    },
+    {
+      "id": 354,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 34
+    },
+    {
+      "id": 355,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 35
+    },
+    {
+      "id": 356,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 36
+    },
+    {
+      "id": 357,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 37
+    },
+    {
+      "id": 358,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 38
+    },
+    {
+      "id": 359,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 39
+    },
+    {
+      "id": 360,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 40
+    },
+    {
+      "id": 361,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 1
+    },
+    {
+      "id": 362,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 2
+    },
+    {
+      "id": 363,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 3
+    },
+    {
+      "id": 364,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 4
+    },
+    {
+      "id": 365,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 5
+    },
+    {
+      "id": 366,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 6
+    },
+    {
+      "id": 367,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 7
+    },
+    {
+      "id": 368,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 8
+    },
+    {
+      "id": 369,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 9
+    },
+    {
+      "id": 370,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 10
+    },
+    {
+      "id": 371,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 11
+    },
+    {
+      "id": 372,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 12
+    },
+    {
+      "id": 373,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 13
+    },
+    {
+      "id": 374,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 14
+    },
+    {
+      "id": 375,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 15
+    },
+    {
+      "id": 376,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 16
+    },
+    {
+      "id": 377,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 17
+    },
+    {
+      "id": 378,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 18
+    },
+    {
+      "id": 379,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 19
+    },
+    {
+      "id": 380,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 20
+    },
+    {
+      "id": 381,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 21
+    },
+    {
+      "id": 382,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 22
+    },
+    {
+      "id": 383,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 23
+    },
+    {
+      "id": 384,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 24
+    },
+    {
+      "id": 385,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 25
+    },
+    {
+      "id": 386,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 26
+    },
+    {
+      "id": 387,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 27
+    },
+    {
+      "id": 388,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 28
+    },
+    {
+      "id": 389,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 29
+    },
+    {
+      "id": 390,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 30
+    },
+    {
+      "id": 391,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 31
+    },
+    {
+      "id": 392,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 32
+    },
+    {
+      "id": 393,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 33
+    },
+    {
+      "id": 394,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 34
+    },
+    {
+      "id": 395,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 35
+    },
+    {
+      "id": 396,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 36
+    },
+    {
+      "id": 397,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 37
+    },
+    {
+      "id": 398,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 38
+    },
+    {
+      "id": 399,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 39
+    },
+    {
+      "id": 400,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 40
+    },
+    {
+      "id": 401,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 1
+    },
+    {
+      "id": 402,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 2
+    },
+    {
+      "id": 403,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 3
+    },
+    {
+      "id": 404,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 4
+    },
+    {
+      "id": 405,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 5
+    },
+    {
+      "id": 406,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 6
+    },
+    {
+      "id": 407,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 7
+    },
+    {
+      "id": 408,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 8
+    },
+    {
+      "id": 409,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 9
+    },
+    {
+      "id": 410,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 10
+    },
+    {
+      "id": 411,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 11
+    },
+    {
+      "id": 412,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 12
+    },
+    {
+      "id": 413,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 3,
+      "minute": 13
+    },
+    {
+      "id": 414,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 1,
+      "minute": 14
+    },
+    {
+      "id": 415,
+      "matchId": 3,
+      "teamId": 1,
+      "playerId": 2,
+      "minute": 15
+    },
+    {
+      "id": 416,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 1
+    },
+    {
+      "id": 417,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 2
+    },
+    {
+      "id": 418,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 3
+    },
+    {
+      "id": 419,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 4
+    },
+    {
+      "id": 420,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 5
+    },
+    {
+      "id": 421,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 6
+    },
+    {
+      "id": 422,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 7
+    },
+    {
+      "id": 423,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 8
+    },
+    {
+      "id": 424,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 9
+    },
+    {
+      "id": 425,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 10
+    },
+    {
+      "id": 426,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 11
+    },
+    {
+      "id": 427,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 12
+    },
+    {
+      "id": 428,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 13
+    },
+    {
+      "id": 429,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 14
+    },
+    {
+      "id": 430,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 15
+    },
+    {
+      "id": 431,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 16
+    },
+    {
+      "id": 432,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 17
+    },
+    {
+      "id": 433,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 18
+    },
+    {
+      "id": 434,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 19
+    },
+    {
+      "id": 435,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 20
+    },
+    {
+      "id": 436,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 21
+    },
+    {
+      "id": 437,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 22
+    },
+    {
+      "id": 438,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 23
+    },
+    {
+      "id": 439,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 24
+    },
+    {
+      "id": 440,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 25
+    },
+    {
+      "id": 441,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 26
+    },
+    {
+      "id": 442,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 27
+    },
+    {
+      "id": 443,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 28
+    },
+    {
+      "id": 444,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 29
+    },
+    {
+      "id": 445,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 30
+    },
+    {
+      "id": 446,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 31
+    },
+    {
+      "id": 447,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 32
+    },
+    {
+      "id": 448,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 33
+    },
+    {
+      "id": 449,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 34
+    },
+    {
+      "id": 450,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 35
+    },
+    {
+      "id": 451,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 36
+    },
+    {
+      "id": 452,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 37
+    },
+    {
+      "id": 453,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 38
+    },
+    {
+      "id": 454,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 39
+    },
+    {
+      "id": 455,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 40
+    },
+    {
+      "id": 456,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 1
+    },
+    {
+      "id": 457,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 2
+    },
+    {
+      "id": 458,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 3
+    },
+    {
+      "id": 459,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 4
+    },
+    {
+      "id": 460,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 5
+    },
+    {
+      "id": 461,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 6
+    },
+    {
+      "id": 462,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 7
+    },
+    {
+      "id": 463,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 8
+    },
+    {
+      "id": 464,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 9
+    },
+    {
+      "id": 465,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 10
+    },
+    {
+      "id": 466,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 11
+    },
+    {
+      "id": 467,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 12
+    },
+    {
+      "id": 468,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 13
+    },
+    {
+      "id": 469,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 14
+    },
+    {
+      "id": 470,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 15
+    },
+    {
+      "id": 471,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 16
+    },
+    {
+      "id": 472,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 17
+    },
+    {
+      "id": 473,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 18
+    },
+    {
+      "id": 474,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 19
+    },
+    {
+      "id": 475,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 20
+    },
+    {
+      "id": 476,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 21
+    },
+    {
+      "id": 477,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 22
+    },
+    {
+      "id": 478,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 23
+    },
+    {
+      "id": 479,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 24
+    },
+    {
+      "id": 480,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 25
+    },
+    {
+      "id": 481,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 26
+    },
+    {
+      "id": 482,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 27
+    },
+    {
+      "id": 483,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 28
+    },
+    {
+      "id": 484,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 29
+    },
+    {
+      "id": 485,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 30
+    },
+    {
+      "id": 486,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 31
+    },
+    {
+      "id": 487,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 32
+    },
+    {
+      "id": 488,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 33
+    },
+    {
+      "id": 489,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 34
+    },
+    {
+      "id": 490,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 35
+    },
+    {
+      "id": 491,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 36
+    },
+    {
+      "id": 492,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 37
+    },
+    {
+      "id": 493,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 38
+    },
+    {
+      "id": 494,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 39
+    },
+    {
+      "id": 495,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 40
+    },
+    {
+      "id": 496,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 1
+    },
+    {
+      "id": 497,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 2
+    },
+    {
+      "id": 498,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 3
+    },
+    {
+      "id": 499,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 4
+    },
+    {
+      "id": 500,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 5
+    },
+    {
+      "id": 501,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 6
+    },
+    {
+      "id": 502,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 7
+    },
+    {
+      "id": 503,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 6,
+      "minute": 8
+    },
+    {
+      "id": 504,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 7,
+      "minute": 9
+    },
+    {
+      "id": 505,
+      "matchId": 3,
+      "teamId": 3,
+      "playerId": 8,
+      "minute": 10
+    }
+  ],
+  "players": [
+    {
+      "id": 1,
+      "teamId": 1,
+      "name": "Tomás Ríos",
+      "photo": "",
+      "position": "Base",
+      "number": 7,
+      "stats": {
+        "pj": 62,
+        "goals": 62
+      }
+    },
+    {
+      "id": 2,
+      "teamId": 1,
+      "name": "Bruno Vega",
+      "photo": "",
+      "position": "Alero",
+      "number": 23,
+      "stats": {
+        "pj": 61,
+        "goals": 61
+      }
+    },
+    {
+      "id": 3,
+      "teamId": 1,
+      "name": "Ramiro Castro",
+      "photo": "",
+      "position": "Pívot",
+      "number": 34,
+      "stats": {
+        "pj": 60,
+        "goals": 60
+      }
+    },
+    {
+      "id": 4,
+      "teamId": 2,
+      "name": "Mateo Luna",
+      "photo": "",
+      "position": "Escolta",
+      "number": 10,
+      "stats": {
+        "pj": 40,
+        "goals": 40
+      }
+    },
+    {
+      "id": 5,
+      "teamId": 2,
+      "name": "Emiliano Cruz",
+      "photo": "",
+      "position": "Ala-pívot",
+      "number": 32,
+      "stats": {
+        "pj": 39,
+        "goals": 39
+      }
+    },
+    {
+      "id": 6,
+      "teamId": 3,
+      "name": "Santiago Paz",
+      "photo": "",
+      "position": "Pívot",
+      "number": 5,
+      "stats": {
+        "pj": 58,
+        "goals": 58
+      }
+    },
+    {
+      "id": 7,
+      "teamId": 3,
+      "name": "Nicolás Soler",
+      "photo": "",
+      "position": "Base",
+      "number": 12,
+      "stats": {
+        "pj": 57,
+        "goals": 57
+      }
+    },
+    {
+      "id": 8,
+      "teamId": 3,
+      "name": "Iván Duarte",
+      "photo": "",
+      "position": "Alero",
+      "number": 21,
+      "stats": {
+        "pj": 57,
+        "goals": 57
+      }
+    },
+    {
+      "id": 9,
+      "teamId": 4,
+      "name": "Julián Roca",
+      "photo": "",
+      "position": "Alero",
+      "number": 8,
+      "stats": {
+        "pj": 36,
+        "goals": 36
+      }
+    },
+    {
+      "id": 10,
+      "teamId": 4,
+      "name": "Facundo Nieva",
+      "photo": "",
+      "position": "Escolta",
+      "number": 44,
+      "stats": {
+        "pj": 35,
+        "goals": 35
+      }
+    }
+  ]
+}

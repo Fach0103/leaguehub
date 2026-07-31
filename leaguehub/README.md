@@ -9,7 +9,7 @@ Aplicación web SPA para gestionar ligas deportivas amateur, construida con HTML
 
 ### División del Trabajo
 
-| Estudiante A | Estudiante B |
+| Estudiante A 
 |---|---|
 | Capa de IndexedDB y transacciones | Vistas #teams y #team/:id |
 | Vistas #matches y #match/:id | Vistas #players y #player/:id |
@@ -17,7 +17,7 @@ Aplicación web SPA para gestionar ligas deportivas amateur, construida con HTML
 | Vista #leagues y export/import JSON | Vista #dashboard con gráficos |
 | Componentes: EventForm, MatchCard | Componentes: StandingsTable, RankingTable, ChartContainer |
 
-**Construido en pareja:** Router, NavBar, Footer, ConfirmDialog, Toast, LoadingState, estilos globales, BracketView, lógica de bracket.
+ Router, NavBar, Footer, ConfirmDialog, Toast, LoadingState, estilos globales, BracketView, lógica de bracket.
 
 ## Catálogo de Deportes Soportados
 
@@ -109,9 +109,6 @@ No se persisten hasta que se finaliza el partido, momento en el que se persisten
 ### Chart.js
 Única librería externa permitida. Se carga desde CDN. Los gráficos se renderizan al navegar a las vistas y se destruyen/crean al navegar de vuelta.
 
-## Capturas de Pantalla
-
-*(Insertar capturas de las 9 vistas aquí)*
 
 ## Vistas del Sistema
 
