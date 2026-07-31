@@ -1,9 +1,3 @@
-/**
- * matches.js
- * CRUD de Match (modo liga: creación manual) + generateFixture().
- * La generación del bracket (modo eliminación directa) va en Fase 6,
- * en un archivo aparte (bracket.js) porque su lógica es muy distinta.
- */
 window.LH = window.LH || {};
 LH.matches = (function () {
   "use strict";
@@ -79,7 +73,6 @@ LH.matches = (function () {
     return LH.db.get(STORE, Number(id));
   }
 
-  /** Solo partidos en estado "scheduled" son editables (fecha y equipos). */
   async function update(id, changes) {
     const match = await getById(id);
     if (!match) throw new Error("Partido no encontrado.");
@@ -94,10 +87,6 @@ LH.matches = (function () {
     return match;
   }
 
-  /**
-   * En modalidad liga solo se pueden eliminar partidos programados
-   * (sección 4.7.4). Los finalizados se "deshacen" en Fase 4.
-   */
   async function remove(id) {
     const match = await getById(id);
     if (!match) throw new Error("Partido no encontrado.");
@@ -107,7 +96,6 @@ LH.matches = (function () {
     return LH.db.delete(STORE, Number(id));
   }
 
-  /** Usado por teams.js para bloquear el borrado de un equipo con partidos. */
   async function hasMatchesForTeam(teamId) {
     teamId = Number(teamId);
     const [asHome, asAway] = await Promise.all([
@@ -117,12 +105,6 @@ LH.matches = (function () {
     return asHome.length > 0 || asAway.length > 0;
   }
 
-  /**
-   * Método del círculo para armar rondas de round-robin: cada ronda es
-   * una lista de pares [homeTeamId, awayTeamId] donde ningún equipo
-   * repite en la misma ronda (por eso las fechas quedan escalonadas).
-   * Si hay número impar de equipos, se agrega un "descanso" (null).
-   */
   function buildRoundRobinRounds(teamIds) {
     const arr = teamIds.slice();
     if (arr.length % 2 !== 0) arr.push(null);
@@ -140,7 +122,6 @@ LH.matches = (function () {
       }
       rounds.push(roundPairs);
 
-      // Rotar todos menos el primero (método del círculo clásico).
       const fixed = current[0];
       const rest = current.slice(1);
       rest.unshift(rest.pop());
@@ -149,11 +130,6 @@ LH.matches = (function () {
     return rounds;
   }
 
-  /**
-   * Genera el fixture completo de una liga (modalidad liga) en una sola
-   * transacción (sección 4.2.2 / RNF-03).
-   * @returns {number} cantidad de partidos generados
-   */
   async function generateFixture(leagueId) {
     const league = await LH.leagues.getById(leagueId);
     if (!league) throw new Error("Liga no encontrada.");
@@ -176,10 +152,10 @@ LH.matches = (function () {
 
     if (league.roundTrip) {
       const secondLeg = rounds.map((round) => round.map(([h, a]) => [a, h]));
-      rounds = rounds.concat(secondLeg); // vuelta después de todas las rondas de ida
+      rounds = rounds.concat(secondLeg);
     }
 
-    const baseDate = Date.now() + WEEK_MS; // arranca en una semana
+    const baseDate = Date.now() + WEEK_MS;
     const toCreate = [];
     rounds.forEach((round, roundIndex) => {
       const roundDate = baseDate + roundIndex * WEEK_MS;

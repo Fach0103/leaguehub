@@ -1,7 +1,3 @@
-/* =========================================================
-   event-form
-   ========================================================= */
-
 .lh-event-form {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));

@@ -1,10 +1,3 @@
-/**
- * <event-form>
- * Sub-formulario de la sección 4.8.2. Recibe los dos equipos y sus
- * plantillas, y emite "lh:add-event" con { teamId, playerId, minute }.
- * No toca IndexedDB ni sabe nada del partido: la vista decide qué hacer
- * con el evento (lo acumula en memoria hasta que se finalice).
- */
 class EventForm extends HTMLElement {
   set homeTeam(v) {
     this._homeTeam = v;

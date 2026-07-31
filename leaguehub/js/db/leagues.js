@@ -1,18 +1,9 @@
-/**
- * leagues.js
- * CRUD de la entidad League + activar liga + borrado en cascada.
- * Nadie fuera de este archivo debería tocar el store "leagues" directamente.
- */
 window.LH = window.LH || {};
 LH.leagues = (function () {
   "use strict";
 
   const STORE = "leagues";
 
-  /**
-   * @param {Object} data { name, sport, mode, season, description,
-   *                         roundTrip?, bracketSize? }
-   */
   async function create(data) {
     if (!data.name || !data.name.trim()) {
       throw new Error("El nombre de la liga es obligatorio.");
@@ -59,7 +50,6 @@ LH.leagues = (function () {
     return LH.db.get(STORE, Number(id));
   }
 
-  /** Solo nombre, temporada y descripción son editables tras crear la liga. */
   async function update(id, changes) {
     const league = await getById(id);
     if (!league) throw new Error("Liga no encontrada.");
@@ -79,15 +69,6 @@ LH.leagues = (function () {
     }
   }
 
-  /**
-   * Elimina la liga y, en cascada, todos sus equipos, jugadores, partidos
-   * y eventos — todo dentro de UNA sola transacción (sección 4.2.4).
-   *
-   * Importante: todo el trabajo se encadena con cursores dentro de los
-   * callbacks onsuccess de la MISMA transacción. No se usa async/await
-   * con operaciones ajenas a ella (fetch, setTimeout, etc.), porque eso
-   * arriesgaría que IndexedDB cierre la transacción antes de tiempo.
-   */
   async function removeCascade(id) {
     id = Number(id);
     await LH.db.transaction(
@@ -95,7 +76,7 @@ LH.leagues = (function () {
       "readwrite",
       (stores) => deleteLeagueContents(stores, id)
     );
-    // Si borramos la liga activa, limpiamos la referencia guardada.
+
     if (localStorage.getItem("lh:activeLeagueId") === String(id)) {
       localStorage.removeItem("lh:activeLeagueId");
     }
@@ -104,7 +85,6 @@ LH.leagues = (function () {
   function deleteLeagueContents(stores, leagueId) {
     stores.leagues.delete(leagueId);
 
-    // Equipos de la liga -> jugadores de cada equipo.
     const teamsCursorReq = stores.teams
       .index("leagueId")
       .openCursor(IDBKeyRange.only(leagueId));
@@ -127,7 +107,6 @@ LH.leagues = (function () {
       cursor.continue();
     };
 
-    // Partidos de la liga -> eventos de cada partido.
     const matchesCursorReq = stores.matches
       .index("leagueId")
       .openCursor(IDBKeyRange.only(leagueId));
@@ -151,10 +130,6 @@ LH.leagues = (function () {
     };
   }
 
-  /**
-   * Activa una liga y desactiva cualquier otra, en una sola transacción
-   * sobre el store "leagues" (operación de integridad de sección 4.2.3).
-   */
   async function setActive(id) {
     id = Number(id);
     await LH.db.transaction([STORE], "readwrite", (stores) => {
@@ -163,7 +138,7 @@ LH.leagues = (function () {
 
       cursorReq.onsuccess = (event) => {
         const cursor = event.target.result;
-        if (!cursor) return; // fin del recorrido
+        if (!cursor) return;
         const record = cursor.value;
         const shouldBeActive = record.id === id;
         if (record.isActive !== shouldBeActive) {
@@ -183,8 +158,7 @@ LH.leagues = (function () {
       const league = await getById(Number(storedId));
       if (league && league.isActive) return league;
     }
-    // Fallback: buscar por índice isActive en la BD (por si localStorage
-    // se perdió pero la BD sigue teniendo una liga marcada como activa).
+
     const all = await getAll();
     return all.find((l) => l.isActive) || null;
   }
@@ -246,23 +220,13 @@ LH.leagues = (function () {
           const matchesToImport = data.matches || [];
           const eventsToImport = data.events || [];
 
-          // Cadena de dependencias real: liga -> equipos -> (jugadores Y
-          // partidos, en paralelo) -> eventos. Cada nivel necesita los IDs
-          // NUEVOS que recién se conocen cuando el add() anterior resuelve
-          // (es asíncrono), así que hay que esperar explícitamente a que
-          // cada nivel termine antes de usar su mapa de IDs viejo->nuevo.
-          // (Bug real que encontramos probando la importación: sin esto,
-          // todo quedaba con teamId/matchId/playerId en null.)
-
           function insertEvents() {
             eventsToImport.forEach((ev) => {
               delete ev.id;
               const newMatchId = oldToNewMatch[ev.matchId];
               const newPlayerId = oldToNewPlayer[ev.playerId];
               const newTeamId = oldToNewTeam[ev.teamId];
-              // Si el partido o el jugador no se pudieron remapear (datos
-              // corruptos en el JSON), se omite el evento en vez de
-              // insertar basura con referencias rotas.
+
               if (!newMatchId || !newPlayerId || !newTeamId) return;
               stores.events.add({
                 matchId: newMatchId,
@@ -304,7 +268,7 @@ LH.leagues = (function () {
               m.leagueId = leagueId;
               m.homeTeamId = m.homeTeamId ? oldToNewTeam[m.homeTeamId] || null : null;
               m.awayTeamId = m.awayTeamId ? oldToNewTeam[m.awayTeamId] || null : null;
-              m.nextMatchId = null; // se recalcula si en el futuro se reconstruye el bracket
+              m.nextMatchId = null;
               const req = stores.matches.add(m);
               req.onsuccess = () => {
                 oldToNewMatch[oldId] = req.result;

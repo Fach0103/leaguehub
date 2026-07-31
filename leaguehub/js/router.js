@@ -1,18 +1,8 @@
-/**
- * router.js
- * Router de hash muy simple, sin dependencias externas.
- * Cada vista se registra en LH.views con una clave (ej. "dashboard").
- * Las rutas dinámicas (#team/:id) se resuelven por patrón.
- *
- * Namespace global: window.LH
- */
 window.LH = window.LH || {};
 
 (function () {
   "use strict";
 
-  // Definición de rutas: patrón -> { view, params }
-  // El patrón usa :nombre para segmentos dinámicos.
   const ROUTES = [
     { pattern: "#dashboard", view: "dashboard" },
     { pattern: "#leagues", view: "leagues" },
@@ -27,10 +17,6 @@ window.LH = window.LH || {};
 
   const DEFAULT_ROUTE = "#dashboard";
 
-  /**
-   * Compara el hash actual contra los patrones definidos.
-   * Devuelve { view, params } o null si no matchea ninguna ruta.
-   */
   function matchRoute(hash) {
     const hashParts = hash.split("/");
 
@@ -62,7 +48,7 @@ window.LH = window.LH || {};
     let hash = window.location.hash || DEFAULT_ROUTE;
     if (!window.location.hash) {
       window.location.hash = DEFAULT_ROUTE;
-      return; // el cambio de hash disparará hashchange y re-renderizará
+      return;
     }
 
     const root = document.getElementById("view-root");
@@ -78,7 +64,6 @@ window.LH = window.LH || {};
       LH.views[match.view](root, match.params);
     }
 
-    // Avisamos a quien esté escuchando (ej. NavBar) que la ruta cambió.
     document.dispatchEvent(
       new CustomEvent("lh:navigate", { detail: { hash, view: match ? match.view : null } })
     );

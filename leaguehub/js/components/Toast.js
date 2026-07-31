@@ -1,9 +1,3 @@
-/**
- * <toast-container>
- * Instancia única en index.html. Uso:
- *   LH.ui.toast("Equipo creado", "success");
- *   LH.ui.toast("No se pudo guardar", "error");
- */
 class ToastContainer extends HTMLElement {
   connectedCallback() {
     this.innerHTML = '<div class="lh-toast-stack"></div>';
@@ -16,7 +10,6 @@ class ToastContainer extends HTMLElement {
     el.textContent = message;
     this.stack.appendChild(el);
 
-    // Doble rAF para asegurar la transición de entrada.
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("is-visible")));
 
     setTimeout(() => {

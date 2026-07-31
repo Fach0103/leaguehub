@@ -1,9 +1,3 @@
-/**
- * Vista: Partidos (#matches)
- * Modalidad liga: creación manual + botón "Generar fixture".
- * Modalidad eliminación directa: solo lectura aquí (el bracket se genera
- * y gestiona desde #stats en la Fase 6); por ahora mostramos aviso.
- */
 window.LH = window.LH || {};
 LH.views = LH.views || {};
 

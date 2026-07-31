@@ -1,9 +1,3 @@
-/**
- * ui.js
- * Puente entre las vistas y los singletons <confirm-dialog> / <toast-container>
- * que viven una sola vez en index.html. Así ninguna vista necesita saber
- * dónde están esos elementos en el DOM.
- */
 window.LH = window.LH || {};
 
 LH.ui = {

@@ -1,9 +1,3 @@
-/**
- * <league-navbar>
- * Barra de navegación global. No conoce el detalle de cada vista,
- * solo la lista de rutas y (más adelante) el nombre/deporte de la
- * liga activa, que se le inyecta vía LH.state.getActiveLeague().
- */
 class LeagueNavbar extends HTMLElement {
   static LINKS = [
     { hash: "#dashboard", label: "Inicio" },
@@ -55,11 +49,6 @@ class LeagueNavbar extends HTMLElement {
     });
   }
 
-  /**
-   * Lee la liga activa desde IndexedDB (vía LH.leagues, Fase 1) y actualiza
-   * el badge. Es async porque IndexedDB lo es; por eso no se hace en el
-   * mismo render() síncrono sino aparte.
-   */
   async updateActiveLeagueBadge() {
     const nameEl = this.querySelector("#lh-active-league .name");
     const sportEl = this.querySelector("#lh-active-league-sport");

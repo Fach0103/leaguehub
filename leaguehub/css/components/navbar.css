@@ -1,7 +1,3 @@
-/* =========================================================
-   league-navbar — panel de vidrio con degradado rojo + blur
-   ========================================================= */
-
 league-navbar {
   display: block;
   position: sticky;
@@ -38,7 +34,6 @@ league-navbar {
 
 .lh-nav__brand span { color: #ffd700; }
 
-/* --- Display de "liga activa" --- */
 .lh-nav__active-league {
   display: flex;
   align-items: center;

@@ -44,7 +44,6 @@ LH.matchOperations = (function () {
     const nextMatchId = match.nextMatchId;
     const slot = match.nextMatchSlot;
 
-    // En eliminación directa, si hay empate se usa winnerTeamId declarado
     let winnerId;
     if (homeScore !== awayScore) {
       winnerId = homeScore > awayScore ? match.homeTeamId : match.awayTeamId;

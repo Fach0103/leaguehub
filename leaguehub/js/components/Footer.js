@@ -1,8 +1,3 @@
-/**
- * <league-footer>
- * Créditos + estado de conexión a IndexedDB.
- * El estado real se setea en Fase 1 vía LH.footer.setDbStatus(bool).
- */
 class LeagueFooter extends HTMLElement {
   connectedCallback() {
     this.render();

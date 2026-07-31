@@ -1,7 +1,3 @@
-/**
- * Vista: Equipos (#teams)
- * CRUD de equipos de la liga activa. Requiere que haya una liga activa.
- */
 window.LH = window.LH || {};
 LH.views = LH.views || {};
 

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LeagueHub</title>
 
-  <!-- CSS: tokens/base primero, luego uno por componente/vista -->
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components/navbar.css" />
   <link rel="stylesheet" href="css/components/footer.css" />
@@ -30,7 +29,7 @@
   <league-navbar></league-navbar>
 
   <main id="view-root">
-    <!-- El router inyecta aquí el contenido de cada vista -->
+
   </main>
 
   <league-footer></league-footer>
@@ -38,19 +37,11 @@
   <confirm-dialog></confirm-dialog>
   <toast-container></toast-container>
 
-  <!--
-    Scripts clásicos (NO type="module"): con file:// Chrome bloquea
-    los ES Modules por CORS. Todo se cuelga del namespace global LH,
-    así que el ORDEN de carga importa: definiciones antes que usos.
-  -->
-
-  <!-- Núcleo -->
   <script src="js/router.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/sports-terms.js"></script>
 
-  <!-- Capa de datos (IndexedDB) -->
   <script src="js/db/db.js"></script>
   <script src="js/db/leagues.js"></script>
   <script src="js/db/teams.js"></script>
@@ -60,10 +51,8 @@
   <script src="js/db/matchOperations.js"></script>
   <script src="js/db/bracket.js"></script>
 
-  <!-- Chart.js (CDN) — única librería externa permitida -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
-  <!-- Componentes (Custom Elements) -->
   <script src="js/components/NavBar.js"></script>
   <script src="js/components/Footer.js"></script>
   <script src="js/components/ConfirmDialog.js"></script>
@@ -79,7 +68,6 @@
   <script src="js/components/EventForm.js"></script>
   <script src="js/components/BracketView.js"></script>
 
-  <!-- Vistas: cada una registra LH.views.<nombre> -->
   <script src="js/views/dashboard.js"></script>
   <script src="js/views/leagues.js"></script>
   <script src="js/views/teams.js"></script>
@@ -90,10 +78,8 @@
   <script src="js/views/matchDetail.js"></script>
   <script src="js/views/stats.js"></script>
 
-  <!-- Datos de ejemplo -->
   <script src="js/db/seed.js"></script>
 
-  <!-- Arranque: siempre al final -->
   <script src="js/app.js"></script>
 </body>
 </html>

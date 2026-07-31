@@ -1,44 +1,32 @@
-/* =========================================================
-   LeagueHub — main.css
-   Tokens de diseño base ("cascarón" de la app).
-   Tema: negro + rojo con glassmorphism (paneles translúcidos +
-   blur + degradados). Los temas por deporte (Fase 7) sobreescriben
-   --signal/--signal-glow a nivel de <body data-sport="futbol">.
-   ========================================================= */
-
 :root {
-  /* --- Paleta principal: oscuro + rojo (marcador deportivo) --- */
-  --pitch-ink: #121212;      /* fondo oscuro neutral (marcador) */
-  --turf: #1e1e1e80;         /* paneles secundarios (con alpha) */
+
+  --pitch-ink: #121212;
+  --turf: #1e1e1e80;
   --turf-solid: #1e1e1e;
-  --chalk: #f0f0f0;          /* texto claro sobre fondo oscuro */
-  --chalk-dim: #a0a0a0;      /* texto secundario sobre fondo oscuro */
-  --steel: #555;             /* bordes, divisores sólidos (placeholders, etc.) */
-  --signal: #c41e3a;         /* acento principal (rojo) */
-  --signal-glow: #ff3b52;    /* variante clara del acento, para degradados */
+  --chalk: #f0f0f0;
+  --chalk-dim: #a0a0a0;
+  --steel: #555;
+  --signal: #c41e3a;
+  --signal-glow: #ff3b52;
   --signal-dim: #c41e3a33;
-  --gold: #e8b93b;           /* ganador / destacado */
-  --ink: #1c1c1c;            /* fondo sólido oscuro (botones, badges) */
-  --paper: #eef0f1;          /* referencia clara (no se usa como fondo de página) */
-  --paper-line: rgba(255, 255, 255, 0.14); /* bordes/divisores translúcidos (vidrio) */
+  --gold: #e8b93b;
+  --ink: #1c1c1c;
+  --paper: #eef0f1;
+  --paper-line: rgba(255, 255, 255, 0.14);
   --danger: #c73e3e;
   --success: #2f8f5b;
 
-  /* --- Vidrio (glassmorphism) --- */
   --glass-bg: rgba(255, 255, 255, 0.055);
   --glass-bg-strong: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.14);
   --glass-blur: 18px;
 
-  /* --- Sombras --- */
   --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.35);
 
-  /* --- Tipografía --- */
   --font-display: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
   --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  /* --- Escala --- */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 16px;
@@ -67,9 +55,7 @@ body {
   font-family: var(--font-body);
   color: var(--chalk);
   -webkit-font-smoothing: antialiased;
-  /* Fondo con profundidad: base casi negra + dos resplandores rojos
-     fijos (no se mueven con el scroll) para que los paneles de vidrio
-     tengan algo de textura/color detrás para "atrapar" con el blur. */
+
   background-color: #0a0a0a;
   background-image:
     radial-gradient(ellipse 900px 600px at 15% -10%, rgba(196, 30, 58, 0.35), transparent 60%),
@@ -100,13 +86,11 @@ button {
   cursor: pointer;
 }
 
-/* Números / marcadores siempre en mono, en toda la app */
 .score, .stat-number, .mono {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 
-/* --- Layout general --- */
 #view-root {
   min-height: calc(100vh - var(--nav-height) - var(--footer-height));
   padding: var(--space-4);
@@ -125,10 +109,6 @@ button {
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
-/* --- Botones ---
-   Primario: degradado rojo con resplandor (glow).
-   Outline: vidrio translúcido, se ilumina en rojo al hover.
-   Ambos legibles sobre el fondo oscuro con blur del body. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -170,8 +150,6 @@ button {
   box-shadow: 0 4px 18px rgba(199, 62, 62, 0.35);
 }
 
-/* --- Identidad visual por deporte (Fase 7) — el nav siempre usa el rojo principal,
-   el resto de los acentos (badges, bordes activos, botones) sí cambian --- */
 body[data-sport="futbol"] { --signal: #2e7d32; --signal-glow: #43a047; --signal-dim: #2e7d3233; }
 body[data-sport="basquet"] { --signal: #e65100; --signal-glow: #fb8c00; --signal-dim: #e6510033; }
 body[data-sport="voley"] { --signal: #1565c0; --signal-glow: #1e88e5; --signal-dim: #1565c033; }

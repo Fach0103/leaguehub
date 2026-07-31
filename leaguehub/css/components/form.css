@@ -1,7 +1,3 @@
-/* =========================================================
-   Formularios compartidos (paneles de crear/editar)
-   ========================================================= */
-
 .lh-toolbar {
   display: flex;
   align-items: center;
@@ -59,7 +55,7 @@
 }
 
 .lh-field select option {
-  background: #1a1414; /* los <option> no heredan el blur, así que se fija un fondo sólido oscuro */
+  background: #1a1414;
   color: var(--chalk);
 }
 

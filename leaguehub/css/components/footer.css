@@ -1,7 +1,3 @@
-/* =========================================================
-   league-footer — barra inferior oscura
-   ========================================================= */
-
 league-footer {
   display: block;
   height: var(--footer-height);

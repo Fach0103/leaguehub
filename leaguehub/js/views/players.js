@@ -1,8 +1,3 @@
-/**
- * Vista: Jugadores (#players)
- * CRUD de jugadores de todos los equipos de la liga activa, con filtros
- * por nombre (debounce), equipo y posición.
- */
 window.LH = window.LH || {};
 LH.views = LH.views || {};
 
@@ -23,7 +18,7 @@ LH.views.players = async function (root) {
   let editingPlayer = null;
   let filters = { search: "", teamId: "", position: "" };
   let teams = [];
-  let allPlayers = []; // jugadores de la liga activa, con su equipo adjunto
+  let allPlayers = [];
 
   async function loadData() {
     teams = await LH.teams.getByLeague(league.id);

@@ -1,17 +1,9 @@
-/**
- * teams.js
- * CRUD de la entidad Team. Siempre filtrada por leagueId.
- */
 window.LH = window.LH || {};
 LH.teams = (function () {
   "use strict";
 
   const STORE = "teams";
 
-  /**
-   * stats agregadas del equipo. Empiezan en cero y las va tocando
-   * matchOperations.js (Fase 4), nunca se calculan "a mano" desde la UI.
-   */
   function emptyStats() {
     return { pj: 0, pg: 0, pe: 0, pp: 0, pf: 0, pc: 0 };
   }
@@ -77,12 +69,6 @@ LH.teams = (function () {
     return team;
   }
 
-  /**
-   * Elimina el equipo. Si tiene jugadores, se eliminan en cascada dentro
-   * de la misma transacción (sección 4.3.3). El bloqueo por "tiene partidos
-   * jugados o programados" se agrega en Fase 3, cuando exista matches.js
-   * y por lo tanto algo que consultar.
-   */
   async function removeCascade(id) {
     id = Number(id);
     await LH.db.transaction(["teams", "players"], "readwrite", (stores) => {

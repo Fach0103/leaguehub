@@ -1,15 +1,3 @@
-/**
- * <league-card>
- * No conoce IndexedDB ni el resto de la app: recibe datos por la
- * propiedad `.league` y emite un evento "lh:action" con lo que el
- * usuario quiso hacer. La vista que la usa decide qué hacer con eso.
- *
- * Uso:
- *   const card = document.createElement("league-card");
- *   card.league = leagueObj;
- *   card.addEventListener("lh:action", (e) => { e.detail.action, e.detail.league });
- *   container.appendChild(card);
- */
 class LeagueCard extends HTMLElement {
   set league(value) {
     this._league = value;

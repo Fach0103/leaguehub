@@ -1,15 +1,3 @@
-/**
- * <confirm-dialog>
- * Instancia única en index.html. Se usa así desde cualquier vista:
- *
- *   const ok = await LH.ui.confirm({
- *     title: "Eliminar equipo",
- *     message: "Esta acción no se puede deshacer.",
- *     confirmLabel: "Eliminar",
- *     danger: true,
- *   });
- *   if (!ok) return;
- */
 class ConfirmDialog extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -29,9 +17,6 @@ class ConfirmDialog extends HTMLElement {
     this.cancelBtn = this.querySelector('[data-action="cancel"]');
   }
 
-  /**
-   * @returns {Promise<boolean>} true si el usuario confirmó
-   */
   show({ title = "Confirmar", message = "", confirmLabel = "Confirmar", danger = false } = {}) {
     this.titleEl.textContent = title;
     this.messageEl.textContent = message;
@@ -56,7 +41,7 @@ class ConfirmDialog extends HTMLElement {
 
       this.confirmBtn.addEventListener("click", onConfirm);
       this.cancelBtn.addEventListener("click", onCancel);
-      this.dialogEl.addEventListener("cancel", onCancel); // tecla ESC
+      this.dialogEl.addEventListener("cancel", onCancel);
       this.dialogEl.showModal();
     });
   }

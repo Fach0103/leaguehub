@@ -1,11 +1,7 @@
-/**
- * utils.js
- * Funciones puras y pequeñas, sin estado, usadas en toda la app.
- */
 window.LH = window.LH || {};
 
 LH.utils = {
-  /** Evita inyección de HTML al insertar texto de usuario en templates. */
+
   escapeHtml(str) {
     if (str === null || str === undefined) return "";
     return String(str)
@@ -16,7 +12,6 @@ LH.utils = {
       .replace(/'/g, "&#039;");
   },
 
-  /** Debounce clásico: retrasa la ejecución hasta que paren los eventos. */
   debounce(fn, wait) {
     let timer = null;
     return function debounced(...args) {
@@ -25,7 +20,6 @@ LH.utils = {
     };
   },
 
-  /** Placeholder de escudo/foto: iniciales sobre un color. */
   initials(name) {
     if (!name) return "?";
     return name

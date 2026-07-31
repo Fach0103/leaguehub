@@ -1,7 +1,3 @@
-/**
- * players.js
- * CRUD de la entidad Player. Siempre asociada a un teamId.
- */
 window.LH = window.LH || {};
 LH.players = (function () {
   "use strict";
@@ -81,10 +77,6 @@ LH.players = (function () {
     return player;
   }
 
-  /**
-   * Bloquea la eliminación si el jugador tiene eventos registrados
-   * en partidos (sección 4.5.4).
-   */
   async function remove(id) {
     const hasEvents = await LH.events.hasEventsForPlayer(id);
     if (hasEvents) {

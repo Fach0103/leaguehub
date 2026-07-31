@@ -1,9 +1,3 @@
-/**
- * <match-card>
- * Recibe `.match`, `.homeTeam`, `.awayTeam` (objetos Team completos,
- * porque Match solo guarda sus IDs). Emite "lh:action" con
- * action: "view" | "edit" | "delete".
- */
 class MatchCard extends HTMLElement {
   set match(value) {
     this._match = value;

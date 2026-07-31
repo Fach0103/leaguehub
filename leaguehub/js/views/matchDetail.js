@@ -1,8 +1,3 @@
-/**
- * Vista: Detalle de Partido (#match/:id)
- * Contiene la operación de integridad central del proyecto: finalizar
- * y deshacer un partido (delegado a LH.matchOperations).
- */
 window.LH = window.LH || {};
 LH.views = LH.views || {};
 
@@ -36,8 +31,6 @@ LH.views.matchDetail = async function (root, params) {
     [...homePlayers, ...awayPlayers].map((p) => [p.id, p])
   );
 
-  // Eventos ya persistidos (si el partido está finalizado, o si viene de
-  // un "deshacer" anterior) se usan como punto de partida del draft.
   const persisted = await LH.events.getByMatch(matchId);
   let draftEvents = persisted.map((ev) => ({
     teamId: ev.teamId,

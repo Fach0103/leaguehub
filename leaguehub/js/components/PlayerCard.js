@@ -1,8 +1,3 @@
-/**
- * <player-card>
- * Recibe `.player` y opcionalmente `.team` (para mostrar escudo/nombre
- * de equipo en el listado general de jugadores, sección 4.5.2).
- */
 class PlayerCard extends HTMLElement {
   set player(value) {
     this._player = value;

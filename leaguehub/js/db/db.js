@@ -1,19 +1,3 @@
-/**
- * db.js
- * Capa de acceso a IndexedDB. NINGÚN otro archivo debe llamar a
- * indexedDB.open(...) o db.transaction(...) directamente fuera de aquí
- * (excepto matchOperations.js en la Fase 4, que necesita transacciones
- * multi-store a medida).
- *
- * Expone:
- *   LH.db.open()                              -> Promise<IDBDatabase>
- *   LH.db.getAll(store)                       -> Promise<Array>
- *   LH.db.getAllByIndex(store, index, value)  -> Promise<Array>
- *   LH.db.get(store, key)                     -> Promise<Object|undefined>
- *   LH.db.add(store, obj)                     -> Promise<key>
- *   LH.db.put(store, obj)                     -> Promise<key>
- *   LH.db.delete(store, key)                  -> Promise<void>
- */
 window.LH = window.LH || {};
 
 (function () {
@@ -33,7 +17,6 @@ window.LH = window.LH || {};
       req.onupgradeneeded = (event) => {
         const db = event.target.result;
 
-        // --- leagues ---
         const leagues = db.createObjectStore("leagues", {
           keyPath: "id",
           autoIncrement: true,
@@ -41,7 +24,6 @@ window.LH = window.LH || {};
         leagues.createIndex("name", "name", { unique: true });
         leagues.createIndex("isActive", "isActive");
 
-        // --- teams ---
         const teams = db.createObjectStore("teams", {
           keyPath: "id",
           autoIncrement: true,
@@ -49,7 +31,6 @@ window.LH = window.LH || {};
         teams.createIndex("leagueId", "leagueId");
         teams.createIndex("name", "name");
 
-        // --- players ---
         const players = db.createObjectStore("players", {
           keyPath: "id",
           autoIncrement: true,
@@ -57,7 +38,6 @@ window.LH = window.LH || {};
         players.createIndex("teamId", "teamId");
         players.createIndex("name", "name");
 
-        // --- matches ---
         const matches = db.createObjectStore("matches", {
           keyPath: "id",
           autoIncrement: true,
@@ -68,7 +48,6 @@ window.LH = window.LH || {};
         matches.createIndex("date", "date");
         matches.createIndex("status", "status");
 
-        // --- events ---
         const events = db.createObjectStore("events", {
           keyPath: "id",
           autoIncrement: true,
@@ -86,7 +65,6 @@ window.LH = window.LH || {};
     return dbPromise;
   }
 
-  /** Envuelve una request de IndexedDB en una Promise. */
   function wrapRequest(req) {
     return new Promise((resolve, reject) => {
       req.onsuccess = () => resolve(req.result);
@@ -136,20 +114,6 @@ window.LH = window.LH || {};
     return wrapRequest(store.delete(key));
   }
 
-  /**
-   * Ejecuta una transacción "cruda" sobre uno o más stores.
-   * `executor(stores, tx)` recibe un objeto { storeName: IDBObjectStore, ... }
-   * y debe encadenar TODAS sus operaciones dentro de esta misma transacción
-   * (nada de abrir otra transacción adentro, nada de awaits ajenos a ella).
-   *
-   * La promesa se resuelve recién en tx.oncomplete (éxito atómico real) y
-   * se rechaza en tx.onerror / tx.onabort (rollback automático de IndexedDB).
-   *
-   * Uso típico (ver matchOperations.js en Fase 4):
-   *   LH.db.transaction(["matches","teams"], "readwrite", (stores) => {
-   *     stores.matches.get(id).onsuccess = (e) => { ... stores.teams.put(...) ... };
-   *   });
-   */
   function runTransaction(storeNames, mode, executor) {
     return openDB().then(
       (db) =>
@@ -165,11 +129,11 @@ window.LH = window.LH || {};
           try {
             executor(stores, tx);
           } catch (err) {
-            // Error síncrono lanzado por el executor: abortamos manualmente.
+
             try {
               tx.abort();
             } catch (e) {
-              /* ya podría estar abortada */
+
             }
             reject(err);
           }

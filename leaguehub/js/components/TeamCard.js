@@ -1,9 +1,3 @@
-/**
- * <team-card>
- * Recibe `.team` (y opcionalmente `.playerCount` / `.position`).
- * Emite "lh:action" igual que LeagueCard. El click en el cuerpo de la
- * tarjeta (no en un botón) emite action "view" para navegar al detalle.
- */
 class TeamCard extends HTMLElement {
   set team(value) {
     this._team = value;
@@ -54,7 +48,7 @@ class TeamCard extends HTMLElement {
 
     const article = this.querySelector("article");
     article.addEventListener("click", (e) => {
-      if (e.target.closest("[data-action]")) return; // los botones manejan lo suyo
+      if (e.target.closest("[data-action]")) return;
       this.emit("view");
     });
     article.addEventListener("keydown", (e) => {

@@ -1,14 +1,10 @@
-/**
- * Vista: Ligas (#leagues)
- * CRUD de ligas + activar liga. Export/Import JSON queda para Fase 8.
- */
 window.LH = window.LH || {};
 LH.views = LH.views || {};
 
 LH.views.leagues = async function (root) {
   root.innerHTML = '<p class="lh-card__meta">Cargando ligas…</p>';
 
-  let editingLeague = null; // null = modo creación
+  let editingLeague = null;
 
   async function refresh() {
     const leagues = await LH.leagues.getAll();
