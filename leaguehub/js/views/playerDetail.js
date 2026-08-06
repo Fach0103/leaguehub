@@ -96,7 +96,12 @@ LH.views.playerDetail = async function (root, params) {
 
   function renderChart() {
     const chart = root.querySelector("#chart-player-goals");
-    if (!chart || finishedMatches.length === 0) return;
+    if (!chart) return;
+
+    if (finishedMatches.length === 0) {
+      chart.render("bar", { datasets: [] }, { fallbackText: "Todavía no hay anotaciones registradas" });
+      return;
+    }
 
     const sortedMatches = [...finishedMatches].sort((a, b) => a.date - b.date);
     const labels = sortedMatches.map((m) =>

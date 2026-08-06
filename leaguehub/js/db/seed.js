@@ -45,7 +45,7 @@ LH.seed = (function () {
       for (let j = 0; j < 2; j++) {
         const p = jugadores[(i * 2 + j) % jugadores.length];
         const created = await LH.players.create({ ...p, teamId: teamIds[i] });
-        playerIds.push(created);
+        playerIds.push(created.id);
       }
     }
 

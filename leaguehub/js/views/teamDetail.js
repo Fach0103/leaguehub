@@ -131,7 +131,15 @@ LH.views.teamDetail = async function (root, params) {
 
   function renderChart() {
     const chart = root.querySelector("#chart-team-evolution");
-    if (!chart || finished.length < 2) return;
+    if (!chart) return;
+
+    if (finished.length < 2) {
+      // Menos de 2 partidos no alcanza para una curva útil; le pedimos al
+      // propio chart-container que muestre su mensaje de "sin datos" en
+      // vez de dejar el <canvas> vacío (RNF-06.3).
+      chart.render("line", { datasets: [] }, { fallbackText: "Necesitas al menos 2 partidos jugados para ver la evolución" });
+      return;
+    }
 
     const sortedFinished = [...finished].sort((a, b) => a.date - b.date);
     const labels = sortedFinished.map((m) =>

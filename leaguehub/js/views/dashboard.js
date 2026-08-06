@@ -157,6 +157,7 @@ LH.views.dashboard = async function (root) {
   }
 
   function renderCharts() {
+    const terms = LH.getSportTerms(league.sport); // 'terms' de paint() no está en alcance acá: son funciones hermanas, no anidadas.
     const chartPf = root.querySelector("#chart-pf");
     if (chartPf) {
       const labels = teams.map((t) => t.name);
@@ -195,6 +196,8 @@ LH.views.dashboard = async function (root) {
           responsive: true,
           maintainAspectRatio: true,
         });
+      } else {
+        chartResults.render("doughnut", { datasets: [] }, { fallbackText: "Todavía no hay partidos finalizados" });
       }
     }
 
@@ -226,6 +229,8 @@ LH.views.dashboard = async function (root) {
         responsive: true,
         maintainAspectRatio: true,
       });
+    } else if (chartTimeline) {
+      chartTimeline.render("line", { datasets: [] }, { fallbackText: "Todavía no hay partidos finalizados" });
     }
   }
 

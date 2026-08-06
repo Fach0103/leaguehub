@@ -100,6 +100,14 @@ LH.matchOperations = (function () {
         m.status = "finished";
         m.homeScore = homeScore;
         m.awayScore = awayScore;
+        // Se guarda explícitamente el ganador: si el marcador queda empatado
+        // (eliminación directa, decidido "por penales" u otro criterio
+        // manual), no hay forma de saberlo solo comparando homeScore/awayScore.
+        // BracketView.js lo usa para resaltar al equipo correcto.
+        m.winnerTeamId =
+          homeScore !== awayScore
+            ? (homeScore > awayScore ? m.homeTeamId : m.awayTeamId)
+            : winnerTeamId || null;
         stores.matches.put(m);
       };
 
@@ -178,6 +186,7 @@ LH.matchOperations = (function () {
         m.status = "scheduled";
         m.homeScore = null;
         m.awayScore = null;
+        m.winnerTeamId = null;
         stores.matches.put(m);
       };
 

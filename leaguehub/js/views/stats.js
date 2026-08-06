@@ -139,6 +139,11 @@ LH.views.stats = async function (root) {
         responsive: true,
         maintainAspectRatio: true,
       });
+    } else if (chartEvo) {
+      // Ningún caso anterior aplicó (sin partidos finalizados, o liga sin
+      // equipos todavía): mostramos el mensaje del propio componente en
+      // vez de dejar el <canvas> vacío (RNF-06.3).
+      chartEvo.render("line", { datasets: [] }, { fallbackText: "No hay datos suficientes" });
     }
 
     const chartScorers = root.querySelector("#chart-top-scorers");
@@ -163,6 +168,8 @@ LH.views.stats = async function (root) {
           responsive: true,
           maintainAspectRatio: true,
         });
+      } else {
+        chartScorers.render("bar", { datasets: [] }, { fallbackText: "Todavía no hay anotaciones" });
       }
     }
 
@@ -181,6 +188,8 @@ LH.views.stats = async function (root) {
         responsive: true,
         maintainAspectRatio: true,
       });
+    } else if (chartExtra) {
+      chartExtra.render("bar", { datasets: [] }, { fallbackText: "No hay datos suficientes" });
     }
   }
 

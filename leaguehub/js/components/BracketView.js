@@ -48,8 +48,12 @@ class BracketView extends HTMLElement {
         const awayName = awayTeam ? awayTeam.name : "Por definir";
 
         const isFinished = m.status === "finished";
+        // Preferimos el ganador ya guardado en el partido (contempla el caso
+        // de empate decidido manualmente); si por algún motivo no está
+        // (partidos viejos, importados de antes de este fix), recalculamos
+        // por marcador como respaldo.
         const winnerId = isFinished
-          ? (m.homeScore > m.awayScore ? m.homeTeamId : m.awayTeamId)
+          ? (m.winnerTeamId != null ? m.winnerTeamId : (m.homeScore > m.awayScore ? m.homeTeamId : m.awayTeamId))
           : null;
 
         const homeClass = winnerId !== null && m.homeTeamId === winnerId ? "is-winner" : "";

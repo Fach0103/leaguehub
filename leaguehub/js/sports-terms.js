@@ -4,7 +4,7 @@ LH.SPORTS = {
   futbol: {
     key: "futbol",
     label: "Fútbol",
-    icon: "⚽",
+    icon: "",
     accent: "#2e7d32",
     scoringEvent: "Gol",
     scoringEventPlural: "Goles",
@@ -15,7 +15,7 @@ LH.SPORTS = {
   basquet: {
     key: "basquet",
     label: "Básquet",
-    icon: "🏀",
+    icon: "",
     accent: "#e65100",
     scoringEvent: "Canasta",
     scoringEventPlural: "Canastas",
@@ -26,7 +26,7 @@ LH.SPORTS = {
   voley: {
     key: "voley",
     label: "Vóley",
-    icon: "🏐",
+    icon: "",
     accent: "#1565c0",
     scoringEvent: "Punto",
     scoringEventPlural: "Puntos",
