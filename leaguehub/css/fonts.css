@@ -1,0 +1,15 @@
+/* =========================================================
+   fonts.css
+   Bungee, autoalojada (archivos en assets/fonts/) para que funcione
+   sin internet (RNF-05) — no depende de Google Fonts CDN.
+   ========================================================= */
+
+@font-face {
+  font-family: "Bungee";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("../assets/fonts/bungee/bungee-latin-400-normal.woff2") format("woff2"),
+    url("../assets/fonts/bungee/bungee-latin-400-normal.woff") format("woff");
+}

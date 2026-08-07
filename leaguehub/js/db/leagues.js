@@ -1,10 +1,15 @@
 window.LH = window.LH || {};
-LH.leagues = (function () {
-  "use strict";
 
-  const STORE = "leagues";
+/**
+ * LeagueService
+ * CRUD de League + activar liga + borrado en cascada + export/import JSON.
+ * Nadie fuera de esta clase debería tocar el store "leagues" directamente.
+ */
+class LeagueService {
+  #store = "leagues";
 
-  async function create(data) {
+  /** @param {Object} data { name, sport, mode, season, description, roundTrip?, bracketSize? } */
+  async create(data) {
     if (!data.name || !data.name.trim()) {
       throw new Error("El nombre de la liga es obligatorio.");
     }
@@ -31,7 +36,7 @@ LH.leagues = (function () {
     };
 
     try {
-      const id = await LH.db.add(STORE, league);
+      const id = await LH.db.add(this.#store, league);
       return { ...league, id };
     } catch (err) {
       if (err && err.name === "ConstraintError") {
@@ -41,17 +46,18 @@ LH.leagues = (function () {
     }
   }
 
-  async function getAll() {
-    const leagues = await LH.db.getAll(STORE);
+  async getAll() {
+    const leagues = await LH.db.getAll(this.#store);
     return leagues.sort((a, b) => b.createdAt - a.createdAt);
   }
 
-  async function getById(id) {
-    return LH.db.get(STORE, Number(id));
+  async getById(id) {
+    return LH.db.get(this.#store, Number(id));
   }
 
-  async function update(id, changes) {
-    const league = await getById(id);
+  /** Solo nombre, temporada y descripción son editables tras crear la liga. */
+  async update(id, changes) {
+    const league = await this.getById(id);
     if (!league) throw new Error("Liga no encontrada.");
 
     if (changes.name !== undefined) league.name = changes.name.trim();
@@ -59,7 +65,7 @@ LH.leagues = (function () {
     if (changes.description !== undefined) league.description = changes.description;
 
     try {
-      await LH.db.put(STORE, league);
+      await LH.db.put(this.#store, league);
       return league;
     } catch (err) {
       if (err && err.name === "ConstraintError") {
@@ -69,12 +75,16 @@ LH.leagues = (function () {
     }
   }
 
-  async function removeCascade(id) {
+  /**
+   * Elimina la liga y, en cascada, todos sus equipos, jugadores, partidos
+   * y eventos — todo dentro de UNA sola transacción (sección 4.2.4).
+   */
+  async removeCascade(id) {
     id = Number(id);
     await LH.db.transaction(
       ["leagues", "teams", "players", "matches", "events"],
       "readwrite",
-      (stores) => deleteLeagueContents(stores, id)
+      (stores) => this.#deleteLeagueContents(stores, id)
     );
 
     if (localStorage.getItem("lh:activeLeagueId") === String(id)) {
@@ -82,21 +92,22 @@ LH.leagues = (function () {
     }
   }
 
-  function deleteLeagueContents(stores, leagueId) {
+  /**
+   * Encadena cursores dentro de la MISMA transacción: equipos -> jugadores,
+   * partidos -> eventos. Privado: nadie fuera de la clase debería llamarlo
+   * suelto, porque no tiene sentido sin una transacción ya abierta.
+   */
+  #deleteLeagueContents(stores, leagueId) {
     stores.leagues.delete(leagueId);
 
-    const teamsCursorReq = stores.teams
-      .index("leagueId")
-      .openCursor(IDBKeyRange.only(leagueId));
+    const teamsCursorReq = stores.teams.index("leagueId").openCursor(IDBKeyRange.only(leagueId));
     teamsCursorReq.onsuccess = (e) => {
       const cursor = e.target.result;
       if (!cursor) return;
       const teamId = cursor.value.id;
       cursor.delete();
 
-      const playersCursorReq = stores.players
-        .index("teamId")
-        .openCursor(IDBKeyRange.only(teamId));
+      const playersCursorReq = stores.players.index("teamId").openCursor(IDBKeyRange.only(teamId));
       playersCursorReq.onsuccess = (ev) => {
         const pCursor = ev.target.result;
         if (!pCursor) return;
@@ -107,18 +118,14 @@ LH.leagues = (function () {
       cursor.continue();
     };
 
-    const matchesCursorReq = stores.matches
-      .index("leagueId")
-      .openCursor(IDBKeyRange.only(leagueId));
+    const matchesCursorReq = stores.matches.index("leagueId").openCursor(IDBKeyRange.only(leagueId));
     matchesCursorReq.onsuccess = (e) => {
       const cursor = e.target.result;
       if (!cursor) return;
       const matchId = cursor.value.id;
       cursor.delete();
 
-      const eventsCursorReq = stores.events
-        .index("matchId")
-        .openCursor(IDBKeyRange.only(matchId));
+      const eventsCursorReq = stores.events.index("matchId").openCursor(IDBKeyRange.only(matchId));
       eventsCursorReq.onsuccess = (ev) => {
         const eCursor = ev.target.result;
         if (!eCursor) return;
@@ -130,12 +137,11 @@ LH.leagues = (function () {
     };
   }
 
-  async function setActive(id) {
+  /** Activa una liga y desactiva cualquier otra, en una sola transacción. */
+  async setActive(id) {
     id = Number(id);
-    await LH.db.transaction([STORE], "readwrite", (stores) => {
-      const store = stores.leagues;
-      const cursorReq = store.openCursor();
-
+    await LH.db.transaction([this.#store], "readwrite", (stores) => {
+      const cursorReq = stores.leagues.openCursor();
       cursorReq.onsuccess = (event) => {
         const cursor = event.target.result;
         if (!cursor) return;
@@ -152,20 +158,19 @@ LH.leagues = (function () {
     localStorage.setItem("lh:activeLeagueId", String(id));
   }
 
-  async function getActive() {
+  async getActive() {
     const storedId = localStorage.getItem("lh:activeLeagueId");
     if (storedId) {
-      const league = await getById(Number(storedId));
+      const league = await this.getById(Number(storedId));
       if (league && league.isActive) return league;
     }
-
-    const all = await getAll();
+    const all = await this.getAll();
     return all.find((l) => l.isActive) || null;
   }
 
-  async function exportLeague(id) {
+  async exportLeague(id) {
     id = Number(id);
-    const league = await getById(id);
+    const league = await this.getById(id);
     if (!league) throw new Error("Liga no encontrada.");
 
     const [teams, matches] = await Promise.all([
@@ -181,7 +186,7 @@ LH.leagues = (function () {
     return JSON.stringify({ league, teams, players, matches, events }, null, 2);
   }
 
-  async function importLeague(jsonStr) {
+  async importLeague(jsonStr) {
     let data;
     try {
       data = JSON.parse(jsonStr);
@@ -193,7 +198,7 @@ LH.leagues = (function () {
       throw new Error("Estructura JSON inválida: falta la liga o sus campos obligatorios.");
     }
 
-    const allLeagues = await getAll();
+    const allLeagues = await this.getAll();
     const nameExists = allLeagues.some((l) => l.name.toLowerCase() === data.league.name.toLowerCase());
     if (nameExists) {
       throw new Error(`Ya existe una liga con el nombre "${data.league.name}". Renómbrala o cancela la importación.`);
@@ -206,99 +211,108 @@ LH.leagues = (function () {
     await LH.db.transaction(
       ["leagues", "teams", "players", "matches", "events"],
       "readwrite",
-      (stores) => {
-        const leagueReq = stores.leagues.add(data.league);
-
-        leagueReq.onsuccess = () => {
-          const leagueId = leagueReq.result;
-          const oldToNewTeam = {};
-          const oldToNewPlayer = {};
-          const oldToNewMatch = {};
-
-          const teamsToImport = data.teams || [];
-          const playersToImport = data.players || [];
-          const matchesToImport = data.matches || [];
-          const eventsToImport = data.events || [];
-
-          function insertEvents() {
-            eventsToImport.forEach((ev) => {
-              delete ev.id;
-              const newMatchId = oldToNewMatch[ev.matchId];
-              const newPlayerId = oldToNewPlayer[ev.playerId];
-              const newTeamId = oldToNewTeam[ev.teamId];
-
-              if (!newMatchId || !newPlayerId || !newTeamId) return;
-              stores.events.add({
-                matchId: newMatchId,
-                playerId: newPlayerId,
-                teamId: newTeamId,
-                minute: ev.minute !== undefined ? ev.minute : null,
-              });
-            });
-          }
-
-          function afterTeamsInserted() {
-            let pendingPlayers = playersToImport.length;
-            let pendingMatches = matchesToImport.length;
-
-            function maybeInsertEvents() {
-              if (pendingPlayers === 0 && pendingMatches === 0) insertEvents();
-            }
-
-            if (pendingPlayers === 0 && pendingMatches === 0) {
-              insertEvents();
-              return;
-            }
-
-            playersToImport.forEach((p) => {
-              const oldId = p.id;
-              delete p.id;
-              p.teamId = p.teamId ? oldToNewTeam[p.teamId] || null : null;
-              const req = stores.players.add(p);
-              req.onsuccess = () => {
-                oldToNewPlayer[oldId] = req.result;
-                pendingPlayers--;
-                maybeInsertEvents();
-              };
-            });
-
-            matchesToImport.forEach((m) => {
-              const oldId = m.id;
-              delete m.id;
-              m.leagueId = leagueId;
-              m.homeTeamId = m.homeTeamId ? oldToNewTeam[m.homeTeamId] || null : null;
-              m.awayTeamId = m.awayTeamId ? oldToNewTeam[m.awayTeamId] || null : null;
-              m.nextMatchId = null;
-              const req = stores.matches.add(m);
-              req.onsuccess = () => {
-                oldToNewMatch[oldId] = req.result;
-                pendingMatches--;
-                maybeInsertEvents();
-              };
-            });
-          }
-
-          let pendingTeams = teamsToImport.length;
-          if (pendingTeams === 0) {
-            afterTeamsInserted();
-            return;
-          }
-
-          teamsToImport.forEach((t) => {
-            const oldId = t.id;
-            delete t.id;
-            t.leagueId = leagueId;
-            const req = stores.teams.add(t);
-            req.onsuccess = () => {
-              oldToNewTeam[oldId] = req.result;
-              pendingTeams--;
-              if (pendingTeams === 0) afterTeamsInserted();
-            };
-          });
-        };
-      }
+      (stores) => this.#importAllInto(stores, data)
     );
   }
 
-  return { create, getAll, getById, update, removeCascade, setActive, getActive, exportLeague, importLeague };
-})();
+  /**
+   * Cadena de dependencias real: liga -> equipos -> (jugadores Y partidos,
+   * en paralelo) -> eventos. Cada nivel necesita los IDs NUEVOS que recién
+   * se conocen cuando el add() anterior resuelve (es asíncrono), así que
+   * se espera explícitamente a que cada nivel termine antes de usar su
+   * mapa de IDs viejo->nuevo.
+   */
+  #importAllInto(stores, data) {
+    const leagueReq = stores.leagues.add(data.league);
+
+    leagueReq.onsuccess = () => {
+      const leagueId = leagueReq.result;
+      const oldToNewTeam = {};
+      const oldToNewPlayer = {};
+      const oldToNewMatch = {};
+
+      const teamsToImport = data.teams || [];
+      const playersToImport = data.players || [];
+      const matchesToImport = data.matches || [];
+      const eventsToImport = data.events || [];
+
+      const insertEvents = () => {
+        eventsToImport.forEach((ev) => {
+          delete ev.id;
+          const newMatchId = oldToNewMatch[ev.matchId];
+          const newPlayerId = oldToNewPlayer[ev.playerId];
+          const newTeamId = oldToNewTeam[ev.teamId];
+          if (!newMatchId || !newPlayerId || !newTeamId) return;
+          stores.events.add({
+            matchId: newMatchId,
+            playerId: newPlayerId,
+            teamId: newTeamId,
+            minute: ev.minute !== undefined ? ev.minute : null,
+          });
+        });
+      };
+
+      const afterTeamsInserted = () => {
+        let pendingPlayers = playersToImport.length;
+        let pendingMatches = matchesToImport.length;
+
+        const maybeInsertEvents = () => {
+          if (pendingPlayers === 0 && pendingMatches === 0) insertEvents();
+        };
+
+        if (pendingPlayers === 0 && pendingMatches === 0) {
+          insertEvents();
+          return;
+        }
+
+        playersToImport.forEach((p) => {
+          const oldId = p.id;
+          delete p.id;
+          p.teamId = p.teamId ? oldToNewTeam[p.teamId] || null : null;
+          const req = stores.players.add(p);
+          req.onsuccess = () => {
+            oldToNewPlayer[oldId] = req.result;
+            pendingPlayers--;
+            maybeInsertEvents();
+          };
+        });
+
+        matchesToImport.forEach((m) => {
+          const oldId = m.id;
+          delete m.id;
+          m.leagueId = leagueId;
+          m.homeTeamId = m.homeTeamId ? oldToNewTeam[m.homeTeamId] || null : null;
+          m.awayTeamId = m.awayTeamId ? oldToNewTeam[m.awayTeamId] || null : null;
+          m.nextMatchId = null;
+          const req = stores.matches.add(m);
+          req.onsuccess = () => {
+            oldToNewMatch[oldId] = req.result;
+            pendingMatches--;
+            maybeInsertEvents();
+          };
+        });
+      };
+
+      let pendingTeams = teamsToImport.length;
+      if (pendingTeams === 0) {
+        afterTeamsInserted();
+        return;
+      }
+
+      teamsToImport.forEach((t) => {
+        const oldId = t.id;
+        delete t.id;
+        t.leagueId = leagueId;
+        const req = stores.teams.add(t);
+        req.onsuccess = () => {
+          oldToNewTeam[oldId] = req.result;
+          pendingTeams--;
+          if (pendingTeams === 0) afterTeamsInserted();
+        };
+      });
+    };
+  }
+}
+
+LH.leagues = new LeagueService();
+LH.LeagueService = LeagueService;

@@ -1,14 +1,14 @@
 window.LH = window.LH || {};
-LH.teams = (function () {
-  "use strict";
 
-  const STORE = "teams";
+/** TeamService — CRUD de Team. Siempre filtrado por leagueId. */
+class TeamService {
+  #store = "teams";
 
-  function emptyStats() {
+  emptyStats() {
     return { pj: 0, pg: 0, pe: 0, pp: 0, pf: 0, pc: 0 };
   }
 
-  async function create(data) {
+  async create(data) {
     if (!data.name || !data.name.trim()) {
       throw new Error("El nombre del equipo es obligatorio.");
     }
@@ -16,7 +16,7 @@ LH.teams = (function () {
       throw new Error("El equipo debe pertenecer a una liga.");
     }
 
-    const existing = await getByLeague(data.leagueId);
+    const existing = await this.getByLeague(data.leagueId);
     const nameTaken = existing.some(
       (t) => t.name.toLowerCase() === data.name.trim().toLowerCase()
     );
@@ -31,29 +31,29 @@ LH.teams = (function () {
       colorPrimary: data.colorPrimary || "#333333",
       colorSecondary: data.colorSecondary || "#ffffff",
       city: data.city || "",
-      stats: emptyStats(),
+      stats: this.emptyStats(),
     };
 
-    const id = await LH.db.add(STORE, team);
+    const id = await LH.db.add(this.#store, team);
     return { ...team, id };
   }
 
-  async function getByLeague(leagueId) {
-    const teams = await LH.db.getAllByIndex(STORE, "leagueId", Number(leagueId));
+  async getByLeague(leagueId) {
+    const teams = await LH.db.getAllByIndex(this.#store, "leagueId", Number(leagueId));
     return teams.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  async function getById(id) {
-    return LH.db.get(STORE, Number(id));
+  async getById(id) {
+    return LH.db.get(this.#store, Number(id));
   }
 
-  async function update(id, changes) {
-    const team = await getById(id);
+  async update(id, changes) {
+    const team = await this.getById(id);
     if (!team) throw new Error("Equipo no encontrado.");
 
     if (changes.name !== undefined) {
       const newName = changes.name.trim();
-      const siblings = await getByLeague(team.leagueId);
+      const siblings = await this.getByLeague(team.leagueId);
       const nameTaken = siblings.some(
         (t) => t.id !== team.id && t.name.toLowerCase() === newName.toLowerCase()
       );
@@ -65,11 +65,16 @@ LH.teams = (function () {
     if (changes.colorSecondary !== undefined) team.colorSecondary = changes.colorSecondary;
     if (changes.city !== undefined) team.city = changes.city;
 
-    await LH.db.put(STORE, team);
+    await LH.db.put(this.#store, team);
     return team;
   }
 
-  async function removeCascade(id) {
+  /**
+   * Elimina el equipo. Si tiene jugadores, se eliminan en cascada dentro
+   * de la misma transacción. El bloqueo por "tiene partidos" vive en la
+   * vista (consulta LH.matches.hasMatchesForTeam antes de llamar a esto).
+   */
+  async removeCascade(id) {
     id = Number(id);
     await LH.db.transaction(["teams", "players"], "readwrite", (stores) => {
       stores.teams.delete(id);
@@ -82,6 +87,7 @@ LH.teams = (function () {
       };
     });
   }
+}
 
-  return { create, getByLeague, getById, update, removeCascade, emptyStats };
-})();
+LH.teams = new TeamService();
+LH.TeamService = TeamService;

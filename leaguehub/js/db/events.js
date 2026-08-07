@@ -1,21 +1,26 @@
 window.LH = window.LH || {};
-LH.events = (function () {
-  "use strict";
 
-  const STORE = "events";
+/**
+ * EventService — solo lectura. Los eventos se ESCRIBEN exclusivamente
+ * dentro de la transacción de MatchOperations.finalizeMatch(), nunca sueltos.
+ */
+class EventService {
+  #store = "events";
 
-  async function getByMatch(matchId) {
-    return LH.db.getAllByIndex(STORE, "matchId", Number(matchId));
+  async getByMatch(matchId) {
+    return LH.db.getAllByIndex(this.#store, "matchId", Number(matchId));
   }
 
-  async function hasEventsForPlayer(playerId) {
-    const events = await LH.db.getAllByIndex(STORE, "playerId", Number(playerId));
+  async getByPlayer(playerId) {
+    return LH.db.getAllByIndex(this.#store, "playerId", Number(playerId));
+  }
+
+  /** Usado por PlayerService para bloquear el borrado de un jugador con anotaciones. */
+  async hasEventsForPlayer(playerId) {
+    const events = await this.getByPlayer(playerId);
     return events.length > 0;
   }
+}
 
-  async function getByPlayer(playerId) {
-    return LH.db.getAllByIndex(STORE, "playerId", Number(playerId));
-  }
-
-  return { getByMatch, hasEventsForPlayer, getByPlayer };
-})();
+LH.events = new EventService();
+LH.EventService = EventService;

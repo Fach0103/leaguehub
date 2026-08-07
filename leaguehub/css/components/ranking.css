@@ -24,7 +24,7 @@
 .lh-ranking th {
   font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   font-size: 11px;
   color: var(--chalk-dim);
   padding: 8px 6px;
@@ -70,7 +70,7 @@
   align-items: center;
   justify-content: center;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 400;
   font-family: var(--font-display);
   background: var(--steel);
   color: #fff;

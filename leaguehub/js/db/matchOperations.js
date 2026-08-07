@@ -1,14 +1,18 @@
 window.LH = window.LH || {};
-LH.matchOperations = (function () {
-  "use strict";
 
-  function computeResult(scored, conceded) {
+/**
+ * MatchOperationsService
+ * La operación de integridad central del proyecto: finalizar y deshacer
+ * un partido, dentro de una sola transacción cada una.
+ */
+class MatchOperationsService {
+  #computeResult(scored, conceded) {
     if (scored > conceded) return "win";
     if (scored < conceded) return "loss";
     return "draw";
   }
 
-  function applyTeamResult(teamsStore, teamId, scored, conceded, result) {
+  #applyTeamResult(teamsStore, teamId, scored, conceded, result) {
     const getReq = teamsStore.get(Number(teamId));
     getReq.onsuccess = () => {
       const team = getReq.result;
@@ -23,7 +27,7 @@ LH.matchOperations = (function () {
     };
   }
 
-  function revertTeamResult(teamsStore, teamId, scored, conceded) {
+  #revertTeamResult(teamsStore, teamId, scored, conceded) {
     const getReq = teamsStore.get(Number(teamId));
     getReq.onsuccess = () => {
       const team = getReq.result;
@@ -31,7 +35,7 @@ LH.matchOperations = (function () {
       team.stats.pj = Math.max(0, team.stats.pj - 1);
       team.stats.pf = Math.max(0, team.stats.pf - scored);
       team.stats.pc = Math.max(0, team.stats.pc - conceded);
-      const result = computeResult(scored, conceded);
+      const result = this.#computeResult(scored, conceded);
       if (result === "win") team.stats.pg = Math.max(0, team.stats.pg - 1);
       else if (result === "draw") team.stats.pe = Math.max(0, team.stats.pe - 1);
       else team.stats.pp = Math.max(0, team.stats.pp - 1);
@@ -39,7 +43,7 @@ LH.matchOperations = (function () {
     };
   }
 
-  function advanceWinner(stores, match, homeScore, awayScore, winnerTeamId) {
+  #advanceWinner(stores, match, homeScore, awayScore, winnerTeamId) {
     if (!match.nextMatchId) return;
     const nextMatchId = match.nextMatchId;
     const slot = match.nextMatchSlot;
@@ -61,7 +65,7 @@ LH.matchOperations = (function () {
     };
   }
 
-  function clearWinnerSlot(stores, match) {
+  #clearWinnerSlot(stores, match) {
     if (!match.nextMatchId) return;
     const getReq = stores.matches.get(match.nextMatchId);
     getReq.onsuccess = () => {
@@ -74,7 +78,13 @@ LH.matchOperations = (function () {
     };
   }
 
-  async function finalizeMatch(matchId, draftEvents, winnerTeamId) {
+  /**
+   * @param {number} matchId
+   * @param {Array<{teamId:number, playerId:number, minute:?number}>} draftEvents
+   * @param {number|null} winnerTeamId - obligatorio si el marcador queda
+   *        empatado en eliminación directa (desempate manual, ej. penales).
+   */
+  async finalizeMatch(matchId, draftEvents, winnerTeamId) {
     matchId = Number(matchId);
     draftEvents = draftEvents || [];
 
@@ -89,8 +99,8 @@ LH.matchOperations = (function () {
       (ev) => Number(ev.teamId) === Number(match.awayTeamId)
     ).length;
 
-    const homeResult = computeResult(homeScore, awayScore);
-    const awayResult = computeResult(awayScore, homeScore);
+    const homeResult = this.#computeResult(homeScore, awayScore);
+    const awayResult = this.#computeResult(awayScore, homeScore);
 
     await LH.db.transaction(["matches", "teams", "players", "events"], "readwrite", (stores) => {
       const matchGetReq = stores.matches.get(matchId);
@@ -103,7 +113,7 @@ LH.matchOperations = (function () {
         // Se guarda explícitamente el ganador: si el marcador queda empatado
         // (eliminación directa, decidido "por penales" u otro criterio
         // manual), no hay forma de saberlo solo comparando homeScore/awayScore.
-        // BracketView.js lo usa para resaltar al equipo correcto.
+        // BracketView lo usa para resaltar al equipo correcto.
         m.winnerTeamId =
           homeScore !== awayScore
             ? (homeScore > awayScore ? m.homeTeamId : m.awayTeamId)
@@ -111,9 +121,12 @@ LH.matchOperations = (function () {
         stores.matches.put(m);
       };
 
-      applyTeamResult(stores.teams, match.homeTeamId, homeScore, awayScore, homeResult);
-      applyTeamResult(stores.teams, match.awayTeamId, awayScore, homeScore, awayResult);
+      this.#applyTeamResult(stores.teams, match.homeTeamId, homeScore, awayScore, homeResult);
+      this.#applyTeamResult(stores.teams, match.awayTeamId, awayScore, homeScore, awayResult);
 
+      // Se reemplazan los eventos del partido (se borran los previos y se
+      // insertan los actuales), así se puede re-finalizar tras un "deshacer"
+      // sin duplicar ni dejar eventos huérfanos.
       const oldEventsCursorReq = stores.events
         .index("matchId")
         .openCursor(IDBKeyRange.only(matchId));
@@ -152,11 +165,12 @@ LH.matchOperations = (function () {
         };
       });
 
-      advanceWinner(stores, match, homeScore, awayScore, winnerTeamId);
+      this.#advanceWinner(stores, match, homeScore, awayScore, winnerTeamId);
     });
   }
 
-  async function undoMatch(matchId) {
+  /** Operación inversa. Los eventos NO se borran: quedan para re-finalizar. */
+  async undoMatch(matchId) {
     matchId = Number(matchId);
 
     const match = await LH.matches.getById(matchId);
@@ -190,8 +204,8 @@ LH.matchOperations = (function () {
         stores.matches.put(m);
       };
 
-      revertTeamResult(stores.teams, match.homeTeamId, match.homeScore, match.awayScore);
-      revertTeamResult(stores.teams, match.awayTeamId, match.awayScore, match.homeScore);
+      this.#revertTeamResult(stores.teams, match.homeTeamId, match.homeScore, match.awayScore);
+      this.#revertTeamResult(stores.teams, match.awayTeamId, match.awayScore, match.homeScore);
 
       Object.entries(countsByPlayer).forEach(([playerId, count]) => {
         const getPlayerReq = stores.players.get(Number(playerId));
@@ -204,9 +218,10 @@ LH.matchOperations = (function () {
         };
       });
 
-      clearWinnerSlot(stores, match);
+      this.#clearWinnerSlot(stores, match);
     });
   }
+}
 
-  return { finalizeMatch, undoMatch };
-})();
+LH.matchOperations = new MatchOperationsService();
+LH.MatchOperationsService = MatchOperationsService;

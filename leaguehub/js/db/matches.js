@@ -1,11 +1,11 @@
 window.LH = window.LH || {};
-LH.matches = (function () {
-  "use strict";
 
-  const STORE = "matches";
-  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+/** MatchService — CRUD de Match (modo liga: creación manual) + generateFixture(). */
+class MatchService {
+  #store = "matches";
+  #WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-  async function create(data) {
+  async create(data) {
     const league = await LH.leagues.getById(data.leagueId);
     if (!league) throw new Error("Liga no encontrada.");
     if (league.mode !== "league") {
@@ -33,7 +33,7 @@ LH.matches = (function () {
     }
 
     const dateKey = new Date(data.date).getTime();
-    const existing = await getByLeague(data.leagueId);
+    const existing = await this.getByLeague(data.leagueId);
     const duplicate = existing.some((m) => {
       const sameDate = new Date(m.date).getTime() === dateKey;
       const sameTeams =
@@ -60,21 +60,22 @@ LH.matches = (function () {
       nextMatchSlot: null,
     };
 
-    const id = await LH.db.add(STORE, match);
+    const id = await LH.db.add(this.#store, match);
     return { ...match, id };
   }
 
-  async function getByLeague(leagueId) {
-    const matches = await LH.db.getAllByIndex(STORE, "leagueId", Number(leagueId));
+  async getByLeague(leagueId) {
+    const matches = await LH.db.getAllByIndex(this.#store, "leagueId", Number(leagueId));
     return matches.sort((a, b) => b.date - a.date);
   }
 
-  async function getById(id) {
-    return LH.db.get(STORE, Number(id));
+  async getById(id) {
+    return LH.db.get(this.#store, Number(id));
   }
 
-  async function update(id, changes) {
-    const match = await getById(id);
+  /** Solo partidos "scheduled" son editables (fecha y equipos). */
+  async update(id, changes) {
+    const match = await this.getById(id);
     if (!match) throw new Error("Partido no encontrado.");
     if (match.status === "finished") {
       throw new Error("No se puede editar un partido finalizado.");
@@ -83,29 +84,36 @@ LH.matches = (function () {
     if (changes.homeTeamId !== undefined) match.homeTeamId = Number(changes.homeTeamId);
     if (changes.awayTeamId !== undefined) match.awayTeamId = Number(changes.awayTeamId);
 
-    await LH.db.put(STORE, match);
+    await LH.db.put(this.#store, match);
     return match;
   }
 
-  async function remove(id) {
-    const match = await getById(id);
+  /** En modalidad liga solo se pueden eliminar partidos programados. */
+  async remove(id) {
+    const match = await this.getById(id);
     if (!match) throw new Error("Partido no encontrado.");
     if (match.status === "finished") {
       throw new Error("No se puede eliminar un partido finalizado. Primero debes deshacerlo.");
     }
-    return LH.db.delete(STORE, Number(id));
+    return LH.db.delete(this.#store, Number(id));
   }
 
-  async function hasMatchesForTeam(teamId) {
+  /** Usado por TeamService/vistas para bloquear el borrado de un equipo con partidos. */
+  async hasMatchesForTeam(teamId) {
     teamId = Number(teamId);
     const [asHome, asAway] = await Promise.all([
-      LH.db.getAllByIndex(STORE, "homeTeamId", teamId),
-      LH.db.getAllByIndex(STORE, "awayTeamId", teamId),
+      LH.db.getAllByIndex(this.#store, "homeTeamId", teamId),
+      LH.db.getAllByIndex(this.#store, "awayTeamId", teamId),
     ]);
     return asHome.length > 0 || asAway.length > 0;
   }
 
-  function buildRoundRobinRounds(teamIds) {
+  /**
+   * Método del círculo: arma rondas de round-robin donde ningún equipo
+   * repite en la misma ronda (por eso las fechas quedan escalonadas).
+   * Privado: es un detalle de implementación de generateFixture().
+   */
+  #buildRoundRobinRounds(teamIds) {
     const arr = teamIds.slice();
     if (arr.length % 2 !== 0) arr.push(null);
     const n = arr.length;
@@ -130,7 +138,8 @@ LH.matches = (function () {
     return rounds;
   }
 
-  async function generateFixture(leagueId) {
+  /** Genera el fixture completo de una liga (modalidad liga) en una sola transacción. */
+  async generateFixture(leagueId) {
     const league = await LH.leagues.getById(leagueId);
     if (!league) throw new Error("Liga no encontrada.");
     if (league.mode !== "league") {
@@ -142,23 +151,23 @@ LH.matches = (function () {
       throw new Error("Se necesitan al menos 2 equipos para generar el fixture.");
     }
 
-    const existing = await getByLeague(leagueId);
+    const existing = await this.getByLeague(leagueId);
     if (existing.length > 0) {
       throw new Error("Esta liga ya tiene partidos generados.");
     }
 
     const teamIds = teams.map((t) => t.id);
-    let rounds = buildRoundRobinRounds(teamIds);
+    let rounds = this.#buildRoundRobinRounds(teamIds);
 
     if (league.roundTrip) {
       const secondLeg = rounds.map((round) => round.map(([h, a]) => [a, h]));
       rounds = rounds.concat(secondLeg);
     }
 
-    const baseDate = Date.now() + WEEK_MS;
+    const baseDate = Date.now() + this.#WEEK_MS;
     const toCreate = [];
     rounds.forEach((round, roundIndex) => {
-      const roundDate = baseDate + roundIndex * WEEK_MS;
+      const roundDate = baseDate + roundIndex * this.#WEEK_MS;
       round.forEach(([homeTeamId, awayTeamId]) => {
         toCreate.push({
           leagueId: Number(leagueId),
@@ -181,14 +190,7 @@ LH.matches = (function () {
 
     return toCreate.length;
   }
+}
 
-  return {
-    create,
-    getByLeague,
-    getById,
-    update,
-    remove,
-    hasMatchesForTeam,
-    generateFixture,
-  };
-})();
+LH.matches = new MatchService();
+LH.MatchService = MatchService;
